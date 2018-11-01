@@ -58,9 +58,10 @@ html, body {
   left: 0;
   bottom: 0;
   width: $nav-width;
-  background-color: $nav-bg;
-  font-size: 13px;
-  font-weight: bold;
+  background-color: #ffffff;
+  font-size: $f6;
+
+  border-right: 1px solid $nav-border;
 
   // language selector for mobile devices
   .lang-selector {
@@ -82,22 +83,22 @@ html, body {
     position: relative;
 
     input {
-      background: $nav-bg;
-      border-width: 0 0 1px 0;
-      border-color: $search-box-border-color;
-      padding: 6px 0 6px 20px;
+      background: rgba(0,0,0,0.04);
+      border-width: 1;
+      border-color: transparent;
+      padding: $space-sm $space-sm $space-sm 25px;
       box-sizing: border-box;
-      margin: $nav-v-padding $nav-padding;
-      width: $nav-width - ($nav-padding*2);
+      margin: $space-xl $space-lg;
+      width: $nav-width - ($space-lg*2);
       outline: none;
       color: $nav-text;
-      border-radius: 0; /* ios has a default border radius */
+      border-radius: $br-sm;
     }
 
     &:before {
       position: absolute;
-      top: 17px;
-      left: $nav-padding;
+      top: 28px;
+      left: 24px;
       color: $nav-text;
       @extend %icon-search;
     }
@@ -124,7 +125,7 @@ html, body {
     }
 
     a {
-      color: $nav-text;
+      color: $accent-1;
       text-decoration: none;
 
       &:hover {
@@ -151,6 +152,10 @@ html, body {
     transition-duration: 200ms;
   }
 
+  .toc-h1 {
+    font-size: $f5;
+  }
+
   // This is the currently selected ToC entry
   .toc-link.active {
     background-color: $nav-active-bg;
@@ -160,28 +165,35 @@ html, body {
   // this is parent links of the currently selected ToC entry
   .toc-link.active-parent {
     background-color: $nav-active-parent-bg;
+    background-color: rgba(0, 0, 0, 0.04);
     color: $nav-active-parent-text;
+    color: #111;
   }
 
   .toc-list-h2 {
     display: none;
     background-color: $nav-subitem-bg;
+    background-color: #fff;
     font-weight: 500;
   }
 
   .toc-h2 {
     padding-left: $nav-padding + $nav-indent;
-    font-size: 12px;
+    font-size: $f6;
   }
 
   .toc-footer {
     padding: 1em 0;
     margin-top: 1em;
-    border-top: 1px dashed $nav-footer-border-color;
+    border-top: 1px solid $nav-border;
 
     li,a {
       color: $nav-text;
       text-decoration: none;
+    }
+
+    a {
+      color: $accent-1;
     }
 
     a:hover {
@@ -189,7 +201,7 @@ html, body {
     }
 
     li {
-      font-size: 0.8em;
+      font-size: $f7;
       line-height: 1.7;
       text-decoration: none;
     }
@@ -197,7 +209,7 @@ html, body {
 }
 
 .toc-link, .toc-footer li {
-  padding: 0 $nav-padding 0 $nav-padding;
+  padding: $space-sm $nav-padding $space-sm $nav-padding;
   display: block;
   overflow-x: hidden;
   white-space: nowrap;
@@ -286,9 +298,11 @@ html, body {
     float:left;
     color: $lang-select-text;
     text-decoration: none;
-    padding: 0 10px;
+    padding: $space-md $space-xl;
     line-height: 30px;
     outline: 0;
+    text-transform: uppercase;
+    font-size: $f6;
 
     &:active, &:focus {
       background-color: $lang-select-pressed-bg;
@@ -346,13 +360,13 @@ html, body {
 
   h1 {
     @extend %header-font;
-    font-size: 25px;
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
+    font-size: $f3;
+    padding-top: $space-xl;
+    padding-bottom: $space-xl;
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    // border-top: 1px solid #ccc;
+    border-bottom: 1px solid $nav-border;
     background-color: #fdfdfd;
   }
 
@@ -363,10 +377,10 @@ html, body {
 
   h2 {
     @extend %header-font;
-    font-size: 19px;
+    font-size: $f4;
     margin-top: 4em;
     margin-bottom: 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid $nav-border;
     padding-top: 1.2em;
     padding-bottom: 1.2em;
     background-image: linear-gradient(to bottom, rgba(#fff, 0.2), rgba(#fff, 0));
@@ -381,13 +395,13 @@ html, body {
 
   h3, h4, h5, h6 {
     @extend %header-font;
-    font-size: 15px;
+    font-size: $f5;
     margin-top: 2.5em;
     margin-bottom: 0.8em;
   }
 
   h4, h5, h6 {
-    font-size: 10px;
+    font-size: $f5;
   }
 
   hr {
@@ -505,6 +519,10 @@ html, body {
   }
 }
 
+a {
+  color: $accent-1;
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // CODE SAMPLE STYLES
 ////////////////////////////////////////////////////////////////////////////////
@@ -612,4 +630,21 @@ html, body {
 
 .highlight, .highlight .w {
   background-color: $code-bg;
+}
+
+// CUSTOM
+
+.logo {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: $space-xl $space-lg;
+  font-size: $f5;
+  border-bottom: 1px solid $nav-border;
+
+  span {
+    text-transform: none;
+    font-weight: normal;
+    margin-left: $space-sm;
+  }
+
 }

@@ -2,9 +2,6 @@
 title: API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
   - javascript
 
 toc_footers:
@@ -12,228 +9,141 @@ toc_footers:
   - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - errors
+
+  - setup/README
+  - setup/1-project-setup
+  - setup/2-elasticsearch
+  - setup/3-indexing
+  - setup/4-using-components
+  - setup/5-default-query
+  - setup/6-extending-components
+
+  - components/README
+  - components/basics/search-box
+  - components/basics/hits
+  - components/basics/nohits
+  - components/basics/initial-loader
+
+  - components/navigation/pagination
+  - components/navigation/refinement-list
+  - components/navigation/numeric-refinement-list
+  - components/navigation/menu
+  - components/navigation/range-filter
+  - components/navigation/dynamic-range-filter
+  - components/navigation/input-filter
+  - components/navigation/checkbox-filter
+  - components/navigation/tag-filter
+  - components/navigation/selected-filters
+  - components/navigation/grouped-selected-filters
+  - components/navigation/reset
+  - components/navigation/hierarchical-menu
+  - components/navigation/hierarchical-refinement-filter
+
+  - components/display/switcher
+  - components/display/page-size-selector
+
+  - components/sorting/sort
+
+  - components/metadata/stats
+
+  - components/ui/layout-components
+  - components/ui/panel
+  - components/ui/list-components
+  - components/ui/range-components
+
+  - theming/README.md
+  - theming/using-searchkit-theme
+  - theming/extending-searchkit-theme
+  - theming/building-your-own
+
+  - core/README
+  - core/Architecture
+  - core/SearchkitManager
+  - core/Accessors
+  - core/ImmutableQuery
+  - core/FieldOptions
+  - core/QueryDSL
+  - core/SearchkitProvider
+  - core/SearchkitComponent
+  - core/Translate
+
+  - upgrading/README
+  - upgrading/migrating_from_0_2
+  - upgrading/migrating_from_0_3
+  - upgrading/migrating_from_0.4
+  - upgrading/migrating_from_0.5
+  - upgrading/migrating_from_0.6
+  - upgrading/migrating_from_0.7
+  - upgrading/migrating_from_0.8
+  - upgrading/migrating_from_0.9
+
+  - server/README
+  - server/searchkit_express
+  - server/indexing
+
+  - developer-guide
+
+
+
 
 search: true
 ---
 
-# Introduction
+# What is Searchkit?
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+```jsx
+const searchkit = new SearchkitManager("http://demo.searchkit.co/api/movies/")
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+const App = ()=> (
+  <SearchkitProvider searchkit={searchkit}>
+    <Layout>
+      <TopBar>
+        <SearchBox
+          autofocus={true}
+          searchOnChange={true}
+          prefixQueryFields={["actors^1","type^2","languages","title^10"]}/>
+      </TopBar>
+      <LayoutBody>
+        <SideBar>
+          <HierarchicalMenuFilter
+            fields={["type.raw", "genres.raw"]}
+            title="Categories"
+            id="categories"/>
+          <RefinementListFilter
+            id="actors"
+            title="Actors"
+            field="actors.raw"
+            operator="AND"
+            size={10}/>
+        </SideBar>
+        <LayoutResults>
+          <ActionBar>
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+            <ActionBarRow>
+              <HitsStats/>
+            </ActionBarRow>
 
-# Authentication
+            <ActionBarRow>
+              <SelectedFilters/>
+              <ResetFilters/>
+            </ActionBarRow>
 
-> To authorize, use this code:
+          </ActionBar>
+          <Hits mod="sk-hits-grid" hitsPerPage={10} itemComponent={MovieHitsGridItem}
+            sourceFilter={["title", "poster", "imdbId"]}/>
+          <NoHits/>
+        </LayoutResults>
+      </LayoutBody>
+    </Layout>
+  </SearchkitProvider>
+)
 
-```ruby
-require 'kittn'
+ReactDOM.render(<App/>, document.getElementById('root'))
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
 ```
+Searchkit is a suite of UI components built in react. The aim is rapidly create beautiful search applications using declarative components, and without being an ElasticSearch expert.
 
-```python
-import kittn
+<img src="./images/codepreview.png"/>
 
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+See [Getting Started](/setup/README.md)
+[Live demo](http://demo.searchkit.co)
