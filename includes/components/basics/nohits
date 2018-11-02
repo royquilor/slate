@@ -1,0 +1,106 @@
+<h2 id='nohits'>NoHits</h2>
+<p><code>NoHits</code> component is displayed when the current query yields no results from Elasticsearch. <code>NoHits</code> may offer actions to help the user tweak their search to return results. <code>NoHits</code> will display an error when Elastic search responds with an error. You can override the display of NoHits by passing in a React Component in <code>component</code> or <code>errorComponent</code> props. See Overriding section for more details.</p>
+
+<p><img src="/includes/components/basics/assets/no-hits.png" alt="Example" /></p>
+<h3 id='tweaking-query-actions'>Tweaking Query Actions</h3>
+<p>If the current query and filters applied returns no results, <code>NoHits</code> component will try to provide steps to adjust the search.</p>
+<h3 id='elasticsearch-suggestions-api'>Elasticsearch Suggestions API</h3>
+<p>If <code>suggestionsField</code> prop is specified, it will use <code>elasticsearch</code>&#39;s suggestions api and show an action to search using the suggestion if found.</p>
+<h3 id='query-without-filters'>Query Without Filters</h3>
+<p><code>NoHits</code> will provide an action to remove the filters if the query without filters will yield results.    </p>
+<h3 id='example-usage'>Example Usage</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">NoHits</span><span class="p">,</span>
+  <span class="nx">SearchkitProvider</span><span class="p">,</span>
+  <span class="nx">SearchkitManager</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(&lt;</span><span class="nt">somehost</span><span class="p">&gt;</span>)
+
+const App = ()=<span class="err">&gt;</span> (
+  <span class="p">&lt;</span><span class="nc">SearchkitProvider</span> <span class="na">searchkit=</span><span class="si">{</span><span class="nx">searchkit</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">10</span><span class="si">}</span> <span class="na">sourceFilter=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span><span class="si">}</span><span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">NoHits</span> <span class="na">translations=</span><span class="si">{</span><span class="p">{</span>
+        <span class="s2">"NoHits.NoResultsFound"</span><span class="p">:</span><span class="err">"</span><span class="nx">No</span> <span class="nx">movies</span> <span class="nx">found</span> <span class="nx">were</span> <span class="nx">found</span> <span class="k">for</span> <span class="p">{</span><span class="nx">query</span><span class="p">}</span><span class="s2">",
+        "</span><span class="nx">NoHits</span><span class="p">.</span><span class="nx">DidYouMean</span><span class="s2">":"</span><span class="nx">Search</span> <span class="k">for</span> <span class="p">{</span><span class="nx">suggestion</span><span class="p">}</span><span class="s2">",
+        "</span><span class="nx">NoHits</span><span class="p">.</span><span class="nx">SearchWithoutFilters</span><span class="s2">":"</span><span class="nx">Search</span> <span class="k">for</span> <span class="p">{</span><span class="nx">query</span><span class="p">}</span> <span class="nx">without</span> <span class="nx">filters</span><span class="err">"</span>
+      <span class="p">}</span><span class="si">}</span> <span class="na">suggestionsField=</span><span class="s2">"title"</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">SearchkitProvider</span><span class="p">&gt;</span>
+)
+
+</code></pre>
+<blockquote>
+<p><strong>Note</strong> here we use NoHits as a sibling to <code>Hits</code></p>
+</blockquote>
+<h3 id='overriding-display-for-nohits'>Overriding display for NoHits</h3>
+<p>If you need to override the display of No Hits, you can pass in a React component into either <code>component</code> or <code>errorComponent</code> to override the default display.</p>
+<pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">NoHits</span><span class="p">,</span>
+  <span class="nx">SearchkitProvider</span><span class="p">,</span>
+  <span class="nx">SearchkitManager</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(&lt;</span><span class="nt">somehost</span><span class="p">&gt;</span>)
+
+const NoHitsDisplay = (props) =<span class="err">&gt;</span> <span class="si">{</span>
+  <span class="kr">const</span> <span class="p">{</span><span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">query</span><span class="p">,</span> <span class="nx">suggestion</span><span class="p">,</span> <span class="nx">noResultsLabel</span><span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="nt">data</span><span class="err">-</span><span class="na">qa=</span><span class="s2">"no-hits"</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">()</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"info"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+        no results for <span class="si">{</span><span class="nx">query</span><span class="si">}</span>!
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="si">}</span>
+
+const NoHitsErrorDisplay = (props) =<span class="err">&gt;</span> <span class="si">{</span>
+  <span class="kr">const</span> <span class="p">{</span><span class="nx">errorLabel</span><span class="p">,</span> <span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">resetSearchFn</span><span class="p">,</span> <span class="nx">tryAgainLabel</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="nt">data</span><span class="err">-</span><span class="na">qa=</span><span class="s2">"no-hits"</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">()</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"info"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+        An error has occurred!
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="si">}</span>
+
+const App = ()=<span class="err">&gt;</span> (
+  <span class="p">&lt;</span><span class="nc">SearchkitProvider</span> <span class="na">searchkit=</span><span class="si">{</span><span class="nx">searchkit</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">10</span><span class="si">}</span> <span class="na">sourceFilter=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span><span class="si">}</span><span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">NoHits</span>
+      <span class="na">component=</span><span class="si">{</span><span class="nx">NoHitsDisplay</span><span class="si">}</span>
+      <span class="na">errorComponent=</span><span class="si">{</span><span class="nx">NoHitsErrorDisplay</span><span class="si">}</span>
+      <span class="na">translations=</span><span class="si">{</span><span class="p">{</span>
+        <span class="s2">"NoHits.NoResultsFound"</span><span class="p">:</span><span class="err">"</span><span class="nx">No</span> <span class="nx">movies</span> <span class="nx">found</span> <span class="nx">were</span> <span class="nx">found</span> <span class="k">for</span> <span class="p">{</span><span class="nx">query</span><span class="p">}</span><span class="s2">",
+        "</span><span class="nx">NoHits</span><span class="p">.</span><span class="nx">DidYouMean</span><span class="s2">":"</span><span class="nx">Search</span> <span class="k">for</span> <span class="p">{</span><span class="nx">suggestion</span><span class="p">}</span><span class="s2">",
+        "</span><span class="nx">NoHits</span><span class="p">.</span><span class="nx">SearchWithoutFilters</span><span class="s2">":"</span><span class="nx">Search</span> <span class="k">for</span> <span class="p">{</span><span class="nx">query</span><span class="p">}</span> <span class="nx">without</span> <span class="nx">filters</span><span class="err">"</span>
+      <span class="p">}</span><span class="si">}</span> <span class="na">suggestionsField=</span><span class="s2">"title"</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">SearchkitProvider</span><span class="p">&gt;</span>
+)
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>suggestionsField</code> <em>(ESField)</em>: The field used to create suggestions from which closely match the current query and will bring better results.</li>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>component</code> <em>(ReactComponent)</em>: Optional. A React component which will be used to render the no hits state.</li>
+<li><code>errorComponent</code> <em>(ReactComponent)</em>: Optional. A React component which will be used to render the error state.</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+</ul>
+<h3 id='translations'>Translations</h3>
+<blockquote>
+<p><em>Note</em> NoHits will interpolate the query or suggestion into your translation</p>
+</blockquote>
+
+<ul>
+<li><code>NoHits.NoResultsFound</code>: No results found for {query}.,</li>
+<li><code>NoHits.DidYouMean</code>:Search for {suggestion},</li>
+<li><code>NoHits.SearchWithoutFilters</code>:Search for {query} without filters</li>
+<li><code>NoHits.NoResultsFoundDidYouMean</code>:No results found for {query}. Did you mean {suggestion}?</li>
+</ul>

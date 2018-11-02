@@ -1,0 +1,55 @@
+<h2 id='hierarchical-menu'>Hierarchical Menu</h2>
+<p>Component which renders a tree like structure. Used for items which have multiple levels of categorization. Used for when documents have only one hierarchical category. For documents with more than one categories, see hierarchical Refinement filter.</p>
+
+<p><img src="/includes/components/navigation/assets/hierarchical-menu.png" alt="Example" /></p>
+<h3 id='indexing'>Indexing</h3>
+<p>Hierarchical Menu needs an array of level fields. Levels is derived from the order of the array. If an item was in /Appliances/Air Conditioners/Window Air Conditioners category, the setup would be as follows:</p>
+<h3 id='mapping-example'>Mapping example</h3><pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="s2">"products"</span><span class="p">:{</span>
+    <span class="s2">"category"</span><span class="p">:{</span>
+      <span class="s2">"properties"</span><span class="p">:{</span>
+       <span class="c1">//includes all ids for flat level querying</span>
+       <span class="s2">"all"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span><span class="s2">"not_analyzed"</span><span class="p">},</span>
+
+       <span class="c1">//tags bucketed by their level in the tree</span>
+       <span class="s2">"lvl1"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span><span class="s2">"not_analyzed"</span><span class="p">},</span>
+       <span class="s2">"lvl2"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span><span class="s2">"not_analyzed"</span><span class="p">},</span>
+       <span class="s2">"lvl3"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span><span class="s2">"not_analyzed"</span><span class="p">},</span>
+       <span class="c1">//...</span>
+       <span class="s2">"lvl10"</span><span class="p">:{</span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"string"</span><span class="p">,</span> <span class="s2">"index"</span><span class="p">:</span><span class="s2">"not_analyzed"</span><span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h4 id='indexing-example'>Indexing example</h4><pre class="highlight javascript"><code><span class="p">{</span>
+  <span class="nx">category</span><span class="p">.</span><span class="nx">lvl1</span><span class="p">:</span><span class="s2">"Appliances"</span><span class="p">,</span>
+  <span class="nx">category</span><span class="p">.</span><span class="nx">lvl2</span><span class="p">:</span><span class="s2">"Air Conditioners"</span><span class="p">,</span>
+  <span class="nx">category</span><span class="p">.</span><span class="nx">lvl3</span><span class="p">:</span><span class="s2">"Window Air Conditioners"</span>
+<span class="p">}</span>
+</code></pre><h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">HierarchicalMenuFilter</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+ <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">HierarchicalMenuFilter</span> <span class="na">fields=</span><span class="si">{</span><span class="p">[</span><span class="s2">"category.lvl1"</span><span class="p">,</span> <span class="s2">"category.lvl2"</span><span class="p">,</span> <span class="s2">"category.lvl3"</span><span class="p">]</span><span class="si">}</span> <span class="na">title=</span><span class="s2">"Categories"</span> <span class="na">id=</span><span class="s2">"categories"</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>fields</code> <em>([ESAttribute])</em>: An array of non-analysed elastic search fields to create aggs.</li>
+<li><code>title</code> <em>(string)</em>: Title of the menu. Shown as a header and within selected filters</li>
+<li><code>id</code> <em>(string)</em>: id of component. Must be unique. Used as key for url serialisation</li>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>orderKey</code> <em>(string)</em>: Order key either using an intrinsic sortable key <code>_count</code> <code>_term</code></li>
+<li><code>orderDirection</code> <em>(string)</em>: <code>asc</code> or <code>desc</code></li>
+<li><code>countFormatter</code> <em>((count:number)=&gt; number|string)</em> A optional function to format the doc counts</li>
+<li><code>size</code> <em>(number)</em>: size of options shown</li>
+</ul>
+<h3 id='demo'>Demo</h3>
+<iframe height='800' scrolling='no' src='//codepen.io/searchkit/embed/jWyWmw/?height=800&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>

@@ -1,0 +1,41 @@
+<h2 id='sorting-selector'>Sorting Selector</h2>
+<p>This component lets you reorder your results. Each option requires a sortable Elasticsearch field and the order of which you want to sort by.</p>
+
+<p><img src="./assets/sorting.png"/></p>
+
+<p><code>Select</code> and <code>Toggle</code> example side by side.</p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">SortingSelector</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">SortingSelector</span> <span class="na">options=</span><span class="si">{</span><span class="p">[</span>
+        <span class="p">{</span><span class="na">label</span><span class="p">:</span><span class="s2">"Relevance"</span><span class="p">,</span> <span class="na">field</span><span class="p">:</span><span class="s2">"_score"</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span><span class="s2">"desc"</span><span class="p">,</span> <span class="na">defaultOption</span><span class="p">:</span><span class="kc">true</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">label</span><span class="p">:</span><span class="s2">"Latest Releases"</span><span class="p">,</span> <span class="na">field</span><span class="p">:</span><span class="s2">"released"</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span><span class="s2">"desc"</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">label</span><span class="p">:</span><span class="s2">"Earliest Releases"</span><span class="p">,</span> <span class="na">field</span><span class="p">:</span><span class="s2">"released"</span><span class="p">,</span> <span class="na">order</span><span class="p">:</span><span class="s2">"asc"</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span><span class="s2">"earliest"</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">label</span><span class="p">:</span><span class="s2">"Highly Rated"</span><span class="p">,</span> <span class="na">key</span><span class="p">:</span><span class="s2">"rating"</span><span class="p">,</span> <span class="na">fields</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span><span class="na">field</span><span class="p">:</span><span class="s2">"rating"</span><span class="p">,</span> <span class="na">options</span><span class="p">:</span> <span class="p">{</span><span class="na">order</span><span class="p">:</span><span class="s2">"desc"</span><span class="p">}},</span>
+          <span class="p">{</span><span class="na">field</span><span class="p">:</span><span class="s2">"prices"</span><span class="p">,</span> <span class="na">options</span><span class="p">:</span> <span class="p">{</span><span class="na">order</span><span class="p">:</span><span class="s2">"asc"</span><span class="p">,</span> <span class="s2">"mode"</span> <span class="p">:</span> <span class="s2">"avg"</span><span class="p">}}</span>
+        <span class="p">]}</span>
+      <span class="p">]</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='advanced-sorting'>Advanced Sorting</h3>
+<p>If you need to specify multiple sorting fields or have special options for sort field like <code>mode</code>, you can use the more advanced <code>fields</code> key (shown in example for &quot;Highly Rated&quot; option). This accepts an array of sort fields and allows sorting properties to be sent in the <code>options</code> object. <em>Requires the <code>key</code> option to be specified.</em></p>
+<h3 id='props'>Props</h3>
+<ul>
+<li><code>options</code> <em>([{label:string, field?:<ESAttribute>, order?:(desc|asc), defaultOption?:boolean, fields?:Object}], key?:string)</em>: Options displayed for the user to order results with. You can use <code>fields</code> if you need to specify special options to sort, see <code>advanced sorting</code> section.</li>
+<li><code>listComponent</code> <em>(ReactComponent)</em> customise how the component is rendered
+
+<ul>
+<li>Compatible with <code>Select</code>, <code>Tabs</code>, <code>Toggle</code>, <code>ItemList</code>, <code>CheckboxItemList</code></li>
+<li>Defaults to <code>Select</code></li>
+</ul></li>
+</ul>
+<h3 id='default-selected'>Default selected</h3>
+<p>The component will look for the <code>defaultOption</code> field on an option and use that as the default selected. If no <code>defaultOption</code> is provided, the component will choose the <em>first</em> option as the default.</p>

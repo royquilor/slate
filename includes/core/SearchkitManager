@@ -1,0 +1,80 @@
+<h2 id='searchkitmanager'>SearchkitManager</h2>
+<p><code>SearchkitManager</code> is the top level class which manages a Searchkit application</p>
+<h3 id='example-usage'>Example Usage</h3><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">SearchkitManager</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="kr">const</span> <span class="nx">host</span> <span class="o">=</span> <span class="s2">"/"</span>
+<span class="c1">// const host = "http//localhost:9200/movies"</span>
+
+<span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="nx">host</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">httpHeaders</span><span class="p">:{},</span>
+  <span class="na">basicAuth</span><span class="p">:</span><span class="s2">"key:val"</span>
+<span class="p">})</span>
+</code></pre><h3 id='options'>Options</h3>
+<ul>
+<li><p><strong>host</strong> - A mandatory host will either be a path to a direct instance of elasticsearch with cors enabled, or can be relative to the domain the application is served on, which usually is a thin proxy to an elasticsearch server. A node implementation can be found here <a href="../server/searchkit_express.md">SearchkitExpress</a></p></li>
+<li><p><strong>httpHeaders</strong> - A key value object containing headers to sent along with each http request</p></li>
+<li><p><strong>basicAuth</strong> - A string containing &quot;key:val&quot; for authenticating on each request, useful if using cloud providers such as <a href="http://searchly.com">searchly.com</a></p></li>
+<li><p><strong>withCredentials</strong> - A boolean to pass to Axios to indicate whether or not cross-site Access-Control requests should be made using credentials</p></li>
+<li><p><strong>searchOnLoad</strong> - A boolean to search on load, defaults to <code>true</code></p></li>
+<li><p><strong>useHistory</strong> - A boolean to enable url history support, defaults to <code>true</code></p></li>
+<li><p><strong>createHistory</strong> - A function which returns an instance of a history obj, defaults to <code>createBrowserHistory from history@4.6.1</code></p></li>
+<li><p><strong>getLocation</strong> - A function which returns the current location which has to implement the LocationInterface {pathname:String,search:String}, defaults to <code>()=&gt; window.location</code></p></li>
+<li><p><strong>searchUrlPath</strong> - A the search endpoint name, defaults to <code>/_search</code>. Used if your server proxy endpoint needs a different url convention.</p></li>
+<li><p><strong>timeout</strong> - A number value to override the default 5000ms response timeout. Optional.</p></li>
+<li><p><strong>defaultSize</strong> - Default size for elastic results, defaults to <code>20</code></p></li>
+</ul>
+<h3 id='default-queries'>Default Queries</h3>
+<p>Sometimes we need to apply a default query which affects the entire search and is not serialized to the browser url.</p>
+
+<p><code>SearchkitManager</code> allows ability to add these</p>
+<pre class="highlight javascript"><code>  <span class="kr">import</span> <span class="p">{</span>
+    <span class="nx">SearchkitManager</span><span class="p">,</span>
+    <span class="nx">TermQuery</span><span class="p">,</span>
+    <span class="nx">FilteredQuery</span><span class="p">,</span>
+    <span class="nx">BoolShould</span>
+  <span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+  <span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+  <span class="nx">searchkit</span><span class="p">.</span><span class="nx">addDefaultQuery</span><span class="p">((</span><span class="nx">query</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">query</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="nx">FilteredQuery</span><span class="p">({</span>
+      <span class="na">filter</span><span class="p">:</span><span class="nx">BoolShould</span><span class="p">([</span>
+        <span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"colour"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">),</span>
+        <span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"colour"</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">)</span>
+      <span class="p">])</span>
+    <span class="p">}))</span>
+  <span class="p">})</span>
+</code></pre><h3 id='reloadsearch'>reloadSearch</h3>
+<p>If you want to reload the search even with query and state hasn&#39;t changed
+<code>typescript
+  searchkit.reloadSearch()
+</code></p>
+<h3 id='query-processor'>Query Processor</h3>
+<p>Searchkit offers ability to mutate the query just before its sent to ElasticSearch, this is so we can always support new apis for ElasticSearch and any custom logic you wish to add that is low level in searchkit normally.</p>
+<pre class="highlight typescript tab-typescript"><code><span class="nx">searchkit</span><span class="p">.</span><span class="nx">setQueryProcessor</span><span class="p">((</span><span class="nx">plainQueryObject</span><span class="p">)</span><span class="o">=&gt;</span><span class="p">{</span>
+  <span class="nx">plainQueryObject</span><span class="p">.</span><span class="nx">source</span> <span class="o">=</span> <span class="kc">false</span>
+  <span class="k">return</span> <span class="nx">plainQueryObject</span>
+<span class="p">})</span>
+</code></pre>
+<blockquote>
+<p><em>Note</em> We only support 1 queryProcessor function currently, so multiple <code>setQueryProcessor</code> calls will override each other.</p>
+</blockquote>
+<h3 id='resultslistener'>resultsListener</h3>
+<p>If you want to be notified when results changed
+```typescript
+let removalFn = searchkit.addResultsListener((results)=&gt;{
+  //do something with results
+})</p>
+
+<p>//removalFn() if you want to stop listening
+```</p>
+<h3 id='shouldperformsearch'>shouldPerformSearch</h3>
+<p>If you want to control whether Searchkit performs a search, you can provide a custom check function
+The <code>shouldPerformSearch</code> function is called with an instance of <code>ImmutableQuery</code>
+<code>typescript
+  //only search when there is a query string
+  this.searchkit.shouldPerformSearch = (query)=&gt; {
+    return !!query.getQueryString()
+  }
+</code></p>

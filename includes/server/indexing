@@ -1,0 +1,73 @@
+<h2 id='indexing-amp-mapping-guide'>Indexing &amp; Mapping Guide</h2>
+<p><code>Elasticsearch</code> querying is very sophisticated, and many of the features rely on an appropriate <code>mapping</code> configured.</p>
+<h3 id='updating-index'>Updating index</h3>
+<p>Straightforward to update the index. See <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-update-settings.html">Updating indices</a>.</p>
+<h4 id='analyzer-extensions'>Analyzer extensions</h4>
+<p>Out the box, elasticsearch uses the default <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-standard-analyzer.html">standard analyzer</a>. We extend the default analyzer to offer <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-word-delimiter-tokenfilter.html">word delimiter</a>, <a href="https://www.elastic.co/guide/en/elasticsearch/reference/1.4/analysis-htmlstrip-charfilter.html">html strip</a> and <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-mapping-charfilter.html">char mapping</a>.</p>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"analysis"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"char_filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+       </span><span class="s2">"replace"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mapping"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"mappings"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"&amp;=&gt; and "</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"word_delimiter"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"word_delimiter"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"split_on_numerics"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"split_on_case_change"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"generate_word_parts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"generate_number_parts"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"catenate_all"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"preserve_original"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"catenate_numbers"</span><span class="p">:</span><span class="kc">true</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"analyzer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"custom"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"char_filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"html_strip"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"replace"</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"tokenizer"</span><span class="p">:</span><span class="w"> </span><span class="s2">"whitespace"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"filter"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="s2">"lowercase"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"word_delimiter"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='searchkit-mapping-best-practices'>Searchkit Mapping best practices</h3><h4 id='indexing-fields-for-filtering-amp-searching'>Indexing fields for filtering &amp; searching</h4>
+<p>Often you will want a field to be both <code>searchable</code> and appear as <code>filters</code>. A field will need to be indexed in 2 ways to achieve this, and we can make use of multi fields</p>
+<h5 id='mapping-example'>Mapping example</h5><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"movie"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"properties"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"genres"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"fields"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">          
+          </span><span class="s2">"raw"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"type"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"index"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"not_analyzed"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This mapping will mean the <code>genres</code> field is indexed in 2 ways. The <code>genres</code> path will be analyzed by elastic search meaning it will be tokenized and have the standard stop words removed which is ideal for a free text search.
+The <code>genres.raw</code> path will be left untouched by <code>Elasticsearch</code>, <code>Searchkit</code> would use <code>not_analyzed</code> paths to power aggregated search components.</p>
+<h5 id='component-examples'>Component examples</h5>
+<p>Using the <code>genres.raw</code> field
+<code>jsx
+&lt;RefinementListFilter id=&quot;genres&quot; title=&quot;Genres&quot; field=&quot;genres.raw&quot; operator=&quot;AND&quot;/&gt;
+</code>
+Using the field for searching using prefix
+<code>jsx
+&lt;SearchBox prefixQueryFields={[&quot;genres^1&quot;, &quot;name^10&quot;]}/&gt;
+</code></p>

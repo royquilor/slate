@@ -1,0 +1,45 @@
+<h2 id='input-filter'>Input Filter</h2>
+<p>A input box based filter which is similar to SearchBox, but can be used multiple times, general on the left side panel.
+<img src="./assets/input-filter.png" height="200px"/></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">InputFilter</span><span class="p">,</span>  
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="p">&lt;</span><span class="nc">InputFilter</span>
+  <span class="na">id=</span><span class="s2">"author_q"</span>
+  <span class="na">title=</span><span class="s2">"Actors filter"</span>
+  <span class="na">placeholder=</span><span class="s2">"Search actors"</span>
+  <span class="na">searchOnChange=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span>
+  <span class="na">prefixQueryFields=</span><span class="si">{</span><span class="p">[</span><span class="s2">"actors"</span><span class="p">]</span><span class="si">}</span>
+  <span class="na">queryFields=</span><span class="si">{</span><span class="p">[</span><span class="s2">"actors"</span><span class="p">]</span><span class="si">}</span>
+<span class="p">/&gt;</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>title</code> <em>(string)</em>: Title of the menu. Shown as a header and within selected filters</li>
+<li><code>id</code> <em>(string)</em>: id of component. Must be unique. Used as key for url serialisation</li>
+<li><code>searchOnChange</code> <em>(Boolean)</em>: Optional. Updates search results as you type. Will be false by default.
+
+<ul>
+<li>use with <code>prefixQueryFields</code> to get a better search as you type behaviour.<br></li>
+</ul></li>
+<li><code>queryBuilder</code> <em>(Function)</em> builder used to create the query going to elastic.
+
+<ul>
+<li>defaults to <code>SimpleQueryString</code></li>
+<li>Supports <code>QueryString</code>, or custom function accepting <code>(query:string, options:Object)</code></li>
+</ul></li>
+<li><code>queryFields</code> <em>(Array<string>)</em>: Optional. An array of elasticsearch fields to search within. Can specify boosting on particular fields. Will search <code>_all</code> by default.</li>
+<li><code>queryOptions</code> <em>(Object)</em>: Optional. An object of options for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.0/query-dsl-query-string-query.html">Query String</a>.</li>
+<li><code>placeholder</code> <em>(string)</em>: placeholder for the input box</li>
+<li><code>prefixQueryFields</code> <em>(Array<string>)</em>: Optional. An array of elasticsearch fields to search within. Can specify boosting on particular fields. Will search <code>_all</code> by default. Will only be used if searchOnChange is true.</li>
+<li><code>prefixQueryOptions</code> <em>(Object)</em>: Optional. An object of options for <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-multi-match-query.html#query-dsl-multi-match-query">MultiMatchQuery </a>.</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>searchThrottleTime</code> <em>(number)</em>: Default is 200ms. Is used when <code>searchOnChange</code> prop is <code>true</code>. A search to elasticsearch will only be invoked once every <code>searchThrottleTime</code> ms.<br></li>
+<li><code>blurAction</code> <em>(search|restore)</em>: When <code>searchOnChange={false}</code> Configure behavior of the InputFtiler  when the user blur&#39;s out of the field. Defaults to <code>search</code></li>
+</ul>
+<h3 id='translations'>Translations</h3>
+<ul>
+<li><code>searchbox.placeholder</code> - &quot;Search&quot;</li>
+<li><code>searchbox.button</code> - &quot;search&quot;</li>
+</ul>

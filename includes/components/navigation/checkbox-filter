@@ -1,0 +1,32 @@
+<h2 id='checkbox-filter'>Checkbox Filter</h2>
+<p>A checkbox filter component which can be used with either simple or more complicated filters to decide on/off behaviour.</p>
+
+<p><img src="./assets/checkbox-filter.png" height="200px"/></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">CheckboxFilter</span><span class="p">,</span>
+  <span class="nx">TermQuery</span><span class="p">,</span>
+  <span class="nx">BoolMust</span><span class="p">,</span>
+  <span class="nx">RangeQuery</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="p">&lt;</span><span class="nc">CheckboxFilter</span> <span class="na">id=</span><span class="s2">"rated-r"</span> <span class="na">title=</span><span class="s2">"Rating"</span> <span class="na">label=</span><span class="s2">"Rated R"</span> <span class="na">filter=</span><span class="si">{</span><span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"rated.raw"</span><span class="p">,</span> <span class="s1">'R'</span><span class="p">)</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nc">CheckboxFilter</span> <span class="na">id=</span><span class="s2">"recent"</span> <span class="na">title=</span><span class="s2">"Date"</span> <span class="na">label=</span><span class="s2">"Recent"</span> <span class="na">filter=</span><span class="si">{</span><span class="nx">RangeQuery</span><span class="p">(</span><span class="s2">"year"</span><span class="p">,</span> <span class="p">{</span><span class="na">gt</span><span class="p">:</span> <span class="mi">2012</span><span class="p">})</span><span class="si">}</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nc">CheckboxFilter</span> <span class="na">id=</span><span class="s2">"old-movies"</span> <span class="na">title=</span><span class="s2">"Movile filter"</span> <span class="na">label=</span><span class="s2">"Old movies"</span> <span class="na">filter=</span><span class="si">{</span>
+  <span class="nx">BoolMust</span><span class="p">([</span>
+    <span class="nx">RangeQuery</span><span class="p">(</span><span class="s2">"year"</span><span class="p">,</span> <span class="p">{</span><span class="na">lt</span><span class="p">:</span> <span class="mi">1970</span><span class="p">}),</span>
+    <span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"type.raw"</span><span class="p">,</span> <span class="s2">"Movie"</span><span class="p">)</span>
+  <span class="p">])</span><span class="si">}</span> <span class="p">/&gt;</span>
+
+</code></pre><h3 id='filter-property'>Filter property</h3>
+<p>Notice how we are able to use any arbitrary ES Query, Searchkit offers out the box Query Builders as seen above, but can be any elastic filter query. See <a href="../../core/QueryDSL.md">QueryDSL</a> for other query builders.</p>
+<h3 id='props'>Props</h3>
+<ul>
+<li><code>id</code> <em>(string)</em>: Required. id of component. Must be unique. Used as key for url serialisation</li>
+<li><code>title</code> <em>(string)</em>: Required. Title used for component and for selected filters component</li>
+<li><code>label</code> <em>(String)</em>: Required. The label used to describe the boolean, used for the selected filters component</li>
+<li><code>filter</code> <em>(ES Filter object)</em>. Required. The filter used decided the on/off functionality of the checkbox.</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>showCount</code> <em>(boolean)</em>: Optional, whether the component should render the facet count, defaults to <code>true</code></li>
+<li><code>containerComponent</code> <em>(React component)</em>: Optional override for the container component, defaults to <code>Panel</code></li>
+<li><code>listComponent</code> <em>(React component)</em>: Optional override for the list component which renders the checkbox, defaults to <code>CheckboxItemList</code></li>
+</ul>

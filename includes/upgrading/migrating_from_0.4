@@ -1,0 +1,12 @@
+<h2 id='migrating-from-searchkit-0-4-x'>Migrating from Searchkit 0.4.x</h2><h3 id='overriding-display-components'>Overriding Display Components</h3>
+<p>Rather than extending a component class and overriding particular methods responsible for rendering, you now use the <code>itemComponent</code> or <code>component</code> prop and pass in a React component to do the rendering. The following components now support this feature:
+- <a href="../components/basics/hits.md">Hits</a>
+- <a href="../components/basics/initial-loader.md">InitialLoader</a>
+- <a href="../components/navigation/menu.md">Menu</a>
+- <a href="../components/navigation/refinement-list.md">Refinement List</a>
+- <a href="../components/navigation/reset.md">Reset</a>
+- <a href="../components/navigation/selected-filters.md">Selected Filters</a></p>
+
+<p>Not all components support this feature yet but will expand in future releases. Let us know via github issues if there is one in particular you need.</p>
+<h3 id='hits-component-no-longer-renders-initial-state'>Hits component no longer renders initial state</h3>
+<p>We have moved the initial loading view into a new <a href="../components/basics/initial-loader.md">Initial loader Component</a></p>

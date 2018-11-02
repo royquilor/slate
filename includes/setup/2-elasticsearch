@@ -1,0 +1,40 @@
+<h2 id='connecting-to-elasticsearch-instance'>Connecting to Elasticsearch instance</h2>
+<p>There are many ways to connect searchkit to an elasticsearch instance. We officially support ES 2.0+ but also works on 1.7.2 +. If connecting directly to elasticsearch (not using the searchkit-express), multipleSearchers cannot be true.</p>
+<h3 id='using-a-cloud-hosted-elasticsearch-instance'>Using a cloud hosted elasticsearch instance</h3>
+<p>Searchkit can use a cloud based elasticsearch instance. If using in production, make sure the url is read only.</p>
+<h3 id='hosting-providers'>Hosting providers</h3>
+<ul>
+<li><a href="https://qbox.io">qbox.io</a></li>
+<li><a href="https://www.elastic.co/cloud">Elastic Cloud</a></li>
+<li><a href="http://searchly.com">search.ly</a></li>
+<li><a href="https://aws.amazon.com/elasticsearch-service/">Amazon Elasticsearch Service</a></li>
+<li><a href="https://www.sematext.com/logsene/index.html">Logsene</a></li>
+<li><a href="https://bonsai.io">Bonsai.io</a></li>
+</ul>
+<h3 id='configuration'>Configuration</h3><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">sk</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"https://kili-eu-west-1.searchly.com/movies/"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">basicAuth</span><span class="p">:</span><span class="s2">"read:teetndhjnrspbzxxyfxmf5fb24suqxuj"</span>
+<span class="p">})</span>
+
+<span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">sk</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="p">...</span>
+<span class="o">&lt;</span><span class="sr">/SearchkitProvider</span><span class="err">&gt;
+</span></code></pre><h3 id='using-local-es-server'>Using Local ES Server</h3>
+<p>Connecting Searchkit to your local elasticsearch instance. If you are are getting a cors related error, you will need to add the following to you `config/elasticsearch.yml&#39; file.</p>
+<pre class="highlight yaml tab-yaml"><code><span class="s">http.cors.enabled</span> <span class="pi">:</span> <span class="s">true</span>  
+<span class="s">http.cors.allow-origin</span> <span class="pi">:</span> <span class="s2">"</span><span class="s">*"</span>
+<span class="s">http.cors.allow-methods</span> <span class="pi">:</span> <span class="s">OPTIONS, HEAD, GET, POST, PUT, DELETE</span>
+<span class="s">http.cors.allow-headers</span> <span class="pi">:</span> <span class="s">X-Requested-With,X-Auth-Token,Content-Type, Content-Length</span>
+</code></pre><h3 id='configuration-2'>Configuration</h3><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"http://localhost:9200/"</span><span class="p">)</span>
+
+
+<span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">searchkit</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="p">...</span>
+<span class="o">&lt;</span><span class="sr">/SearchkitProvider</span><span class="err">&gt;
+</span></code></pre><h3 id='proxy-elasticsearch-connection'>Proxy elasticsearch connection</h3>
+<p>We built a plugin for node express called <a href="http://www.github.com/searchkit/searchkit-express">searchkit-express</a>. This proxies the search request to elasticsearch via the server. This allows to validate requests on the server and with options to apply additional filters before it reaches the elasticsearch instance. See <a href="../server/searchkit_express.md">searchkit-express setup</a> for more information.</p>
+<h3 id='configuration-3'>Configuration</h3><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">searchkit</span><span class="p">}</span><span class="o">&gt;</span>
+<span class="p">...</span>
+<span class="o">&lt;</span><span class="sr">/SearchkitProvider</span><span class="err">&gt;
+</span></code></pre>

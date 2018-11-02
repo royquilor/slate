@@ -1,0 +1,23 @@
+<h2 id='migrating-from-searchkit-0-8-x'>Migrating from Searchkit 0.8.x</h2><h3 id='breaking-changes'>Breaking changes</h3><h4 id='action-bar-classes-renamed'>Action bar classes renamed</h4>
+<p><code>sk-action-bar__info</code> + <code>sk-action-bar__filter</code> renamed to <code>sk-action-bar-row</code>.
+We strongly recommend using Searchkit&#39;s new layout components, see more below.</p>
+<h3 id='notable-changes'>Notable Changes</h3><h4 id='layout-components'>Layout components</h4>
+<p>Brand new layout components, rather than using div&#39;s with specific classNames, we now provide out the box
+  layout components which will work towards responsive layout in future versions.
+  We strongly encourage you all to use these new layout components.</p>
+
+<ul>
+<li><code>Layout</code>, <code>TopBar</code>, <code>LayoutBody</code>, <code>SideBar</code>, <code>LayoutResults</code>, <code>ActionBar</code>, <code>ActionBarRow</code></li>
+<li>see <a href="../components/ui/layout-components.md">Layout example</a></li>
+<li>see <a href="../theming/using-searchkit-theme.md">Theming guide</a>
+
+<ul>
+<li>New <a href="../components/navigation/checkbox-filter.md">CheckboxFilter</a><br></li>
+<li>New <a href="../components/navigation/input-filter.md">InputFilter</a><br></li>
+<li>New <a href="../components/navigation/dynamic-range-filter.md">DynamicRangeFilter</a><br></li>
+<li>New <a href="../components/navigation/tag-filter.md">TagFilter components</a><br></li>
+<li><code>SortSelector</code> supports multiple sort fields</li>
+<li><code>SearchkitManager</code> has new <code>reloadSearch</code> method</li>
+<li><code>SearchBox</code> and <code>InputFilter</code> support new <code>queryBuilder</code> and <code>prefixQueryOptions</code> props</li>
+</ul></li>
+</ul>

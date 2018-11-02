@@ -1,0 +1,82 @@
+<h2 id='refinement-list'>Refinement list</h2>
+<p>Lets the user refine the search results. You can specify if you want filters to be ORed or ANDed. For example, if you filter on a and b with OR, results with either the value a or b will match.</p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">RefinementListFilter</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+ <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">RefinementListFilter</span> <span class="na">id=</span><span class="s2">"actors"</span> <span class="na">title=</span><span class="s2">"Actors"</span> <span class="na">field=</span><span class="s2">"actors.raw"</span> <span class="na">operator=</span><span class="s2">"AND"</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='overriding-filter-option-component'>Overriding Filter Option Component</h3>
+<p>If you want to tweak the markup for a refinement option, you can use the <code>itemComponent</code> prop and pass in a new react component to be used to render each option.</p>
+<pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Pagination</span><span class="p">,</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">RefinementListFilter</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">RefinementOption</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">option</span><span class="p">().</span><span class="nx">state</span><span class="p">({</span><span class="na">selected</span><span class="p">:</span><span class="nx">props</span><span class="p">.</span><span class="nx">selected</span><span class="p">}).</span><span class="nx">mix</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"item"</span><span class="p">))</span><span class="si">}</span> <span class="na">onClick=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">onClick</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s2">"text"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">label</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s2">"count"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">count</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">RefinementListFilter</span>
+        <span class="na">field=</span><span class="s2">"languages.raw"</span>
+        <span class="na">title=</span><span class="s2">"Languages"</span>
+        <span class="na">id=</span><span class="s2">"languages"</span> <span class="na">itemComponent=</span><span class="si">{</span><span class="nx">RefinementOption</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>field</code> <em>(ESAttribute)</em>: Non-analysed elastic search field to create aggs for the menu</li>
+<li><code>title</code> <em>(string)</em>: Title of the menu. Shown as a header and within selected filters</li>
+<li><code>id</code> <em>(string)</em>: id of component. Must be unique. Used as key for url serialisation</li>
+<li><code>size</code> <em>(number)</em>: Amount of facets to bring back, this will influence the view more functionality.</li>
+<li><code>operator</code> <em>(&#39;AND&#39;|&#39;OR&#39;)</em>: If you filter on a and b with OR, results with either the value a or b will match. If you select a and b, results will show which have both a and b.</li>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>itemComponent</code> <em>(ReactComponent)</em>: Optional. React component which overrides the default filter option component. See <code>Overriding Filter Option Component</code> section.</li>
+<li><code>listComponent</code> <em>(ReactComponent)</em>: Optional. Overrides the component at the list level.
+
+<ul>
+<li>Compatible with <code>Select</code>, <code>Tabs</code>, <code>Toggle</code>, <code>TagCloud</code>, <code>ItemList</code>, <code>CheckboxItemList</code>, <code>ItemHistogramList</code></li>
+<li>Defaults to <code>CheckboxItemList</code></li>
+</ul></li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>orderKey</code> <em>(string)</em>: Order key either using an intrinsic sortable key <code>_count</code> <code>_term</code></li>
+<li><code>orderDirection</code> <em>(string)</em>: <code>asc</code> or <code>desc</code></li>
+<li><code>include</code> <em>(Array<string>|string):</em> Terms bucket  include parameter see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.x/search-aggregations-bucket-terms-aggregation.html#_filtering_values_2">Terms bucket filtering</a></li>
+<li><code>exclude</code> <em>(Array<string>|string):</em> Terms bucket exclude parameter, see above</li>
+<li><code>fieldOptions</code> <em>({type:&quot;embedded|nested|children&quot;, options:Object})</em> Configures the type field that is stored in ElasticSearch, can be <code>embedded</code>(default) <code>nested</code> or <code>children</code>
+
+<ul>
+<li><code>type:nested</code> requires <code>options.path</code> provided</li>
+<li><code>type:children</code> requires <code>options.childType</code> provided</li>
+<li>see <a href="../../core/FieldOptions.md">Field Options</a></li>
+</ul></li>
+<li><code>countFormatter</code> <em>((count:number)=&gt; number|string)</em> A optional function to format the doc counts</li>
+<li><code>bucketsTransform</code> <em>((buckets:Array)=&gt; transformedBuckets)</em> A optional function to transform the buckets used for the aggregation, can be used to sort the list or to inject new facets.</li>
+</ul>
+<h3 id='translations'>Translations</h3>
+<ul>
+<li><code>facets.view_more</code> - View more</li>
+<li><code>facets.view_less</code> - View less</li>
+<li><code>facets.view_all</code> - View all</li>
+</ul>
+<h3 id='demo'>Demo</h3>
+<iframe height='800' scrolling='no' src='//codepen.io/searchkit/embed/zrNrzL/?height=800&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>

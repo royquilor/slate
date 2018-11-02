@@ -1,0 +1,32 @@
+<h2 id='range-components'>Range Components</h2>
+<p>A Suite of UI Components which render ranges in various ways and can be passed to some Searchkit components to change their range appearance.</p>
+
+<p><img src="./assets/range-components.png" /></p>
+
+<p>Currently works for <code>RangeFilter</code> using the <code>rangeComponent</code> prop</p>
+<h3 id='rangesliderhistogram'>RangeSliderHistogram</h3>
+<p>RangeFilter&#39;s default style</p>
+
+<p><img src="./assets/range-slider-histogram.png"/></p>
+<h3 id='rangesliderhistograminput'>RangeSliderHistogramInput</h3>
+<p>Full-featured range component with a slider, histogram, and input. All other current range components are slimmed-down versions of this one.</p>
+
+<p><img src="./assets/range-slider-histogram-input.png"/></p>
+<h3 id='rangeinput'>RangeInput</h3>
+<p>Range component containing only min/max input fields. Requires pressing &quot;Go&quot; to update the filter.</p>
+
+<p><img src="./assets/range-input.png"/></p>
+<h3 id='rangeslider'>RangeSlider</h3>
+<p>Simple slider, using <code>rc-slider</code>. Updates the filter when the handle is released.</p>
+
+<p><img src="./assets/range-slider.png"/></p>
+<h3 id='rangehistogram'>RangeHistogram</h3>
+<p>Renders a histogram with no filtering possibilities.</p>
+
+<p><img src="./assets/range-histogram.png"/></p>
+<h3 id='rangesliderinput'>RangeSliderInput</h3>
+<p><img src="./assets/range-slider-input.png"/></p>
+<h3 id='rangehistograminput'>RangeHistogramInput</h3>
+<p><img src="./assets/range-histogram-input.png"/></p>
+<h3 id='compatible-parent-components'>Compatible parent components</h3><h4 id='rangefilter'>RangeFilter</h4>
+<p>Works with all range components</p>

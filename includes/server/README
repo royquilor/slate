@@ -1,0 +1,5 @@
+<h1 id='serverside-guide'>Serverside Guide</h1>
+<ul>
+<li><a href="searchkit_express.md">Using Express</a></li>
+<li><a href="indexing.md">Indexing &amp; Mapping Guide</a> </li>
+</ul>

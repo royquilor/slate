@@ -1,0 +1,75 @@
+<h2 id='immutablequery'>ImmutableQuery</h2>
+<p>An immutable query builder which is passed around particular <code>Accessors</code> before being sent to <code>ElasticSearch</code>. This is used internally by Searchkit components</p>
+<h3 id='example-usage'>Example usage</h3><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">ImmutableQuery</span><span class="p">,</span>
+  <span class="nx">SimpleQueryString</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="kd">let</span> <span class="nx">query</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ImmutableQuery</span><span class="p">()</span>
+<span class="kd">let</span> <span class="nx">newQuery</span> <span class="o">=</span> <span class="nx">query</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">addQuery</span><span class="p">(</span>
+  <span class="nx">SimpleQueryString</span><span class="p">(</span><span class="s2">"search term"</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1">//query + newQuery are seperate</span>
+</code></pre><h3 id='api'>API</h3>
+<ul>
+<li><strong><code>.addQuery(queryObject)</code></strong>
+<code>js
+//simple query
+new ImmutableQuery().addQuery(SimpleQueryString(&quot;Hello&quot;))
+</code>
+<code>js
+//simple query + prefix queries on title(boosted) + description
+new ImmutableQuery().addQuery(BoolMust([
+SimpleQueryString(&quot;Termina&quot;),
+MatchPhrasePrefix(&quot;Termina&quot;, &quot;movieTitle^5&quot;)
+MatchPhrasePrefix(&quot;Termina&quot;, &quot;movieDescription&quot;)
+])
+</code></li>
+<li><strong><code>.addFilter(key, boolObject)</code></strong>
+<code>js
+//filter on either color of red or yellow
+new ImmutableQuery().addFilter(&quot;color&quot;, BoolShould([
+Term(&quot;color&quot;, &quot;red&quot;),
+Term(&quot;color&quot;, &quot;yellow&quot;)
+]))
+</code></li>
+<li><p><strong><code>.addAnonymousFilter(key, boolObject)</code></strong>
+<code>js
+//filter on either color of red or yellow
+new ImmutableQuery().addAnonymousFilter(BoolShould([
+Term(&quot;color&quot;, &quot;red&quot;),
+Term(&quot;color&quot;, &quot;yellow&quot;)
+]))
+</code></p></li>
+<li><p><strong><code>.setSize(size)</code></strong>
+<code>js
+new ImmutableQuery().setSize(10)
+</code></p></li>
+<li><p><strong><code>.getSize()</code></strong>
+<code>js
+query.getSize()
+</code></p></li>
+<li><p><strong><code>.setFrom(from)</code></strong>
+<code>js
+new ImmutableQuery().setFrom(100)
+</code></p></li>
+<li><p><strong><code>.getFrom()</code></strong>
+<code>js
+query.getFrom()
+</code></p></li>
+<li><p><strong><code>.getPage()</code></strong>
+<code>js
+query.getPage()
+</code></p></li>
+<li><p><strong><code>.setSort(sortOb)</code></strong>
+<code>js
+new ImmutableQuery().setSort([  
+{&quot;price&quot; : {&quot;order&quot; : &quot;asc&quot;}}  
+])
+</code></p></li>
+<li><p><strong><code>.setSource(sourceFilter)</code></strong>
+<code>js
+new ImmutableQuery().setSource([&quot;title&quot;, &quot;thumbnail&quot;])    
+</code></p></li>
+</ul>

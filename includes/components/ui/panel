@@ -1,0 +1,30 @@
+<h2 id='panel'>Panel</h2>
+<p>This is a titled Panel component which can be collapsed, it is the default <code>containerComponent</code> used by our filter components</p>
+
+<p><img src="./assets/panel.png" height="150px"/></p>
+<pre class="highlight jsx tab-jsx"><code><span class="kr">import</span>  <span class="p">{</span><span class="nx">Panel</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="kr">const</span> <span class="nx">PanelExample</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nc">Panel</span> <span class="na">title=</span><span class="s2">"My Panel"</span> <span class="na">collapsable=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span> <span class="na">defaultCollapsed=</span><span class="si">{</span><span class="kc">false</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>my content...<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">Panel</span><span class="p">&gt;</span>
+<span class="p">)</span>
+
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>title</code> <em>(string)</em>  - the title of the panel</li>
+<li><code>collapsable</code> <em>(boolean)</em> - Whether the panel can be collapsed (defaults to false)</li>
+<li><code>defaultCollapsed</code> <em>(boolean)</em> - Whether the panel can be collapsed (defaults to true when collapsable = true)</li>
+</ul>
+<h3 id='making-a-filter-component-collapsable'>Making a filter component collapsable</h3>
+<p><img src="./assets/panel-menu-collapsable.png" height="150px"/></p>
+<pre class="highlight jsx tab-jsx"><code>  <span class="o">&lt;</span><span class="nx">MenuFilter</span> <span class="nx">field</span><span class="o">=</span><span class="s2">"type.raw"</span> <span class="nx">size</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
+    <span class="nx">title</span><span class="o">=</span><span class="s2">"Movie Type"</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"types"</span>
+    <span class="nx">containerComponent</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">Panel</span> <span class="nx">collapsable</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">defaultCollapsed</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span><span class="sr">/&gt;}/</span><span class="o">&gt;</span>
+  <span class="sr">/</span><span class="err">&gt;
+</span></code></pre><h3 id='using-an-action-bar-component-in-a-panel'>Using an action bar component in a panel</h3>
+<p><img src="./assets/panel-action-component.png" height="120px"/></p>
+<pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">Panel</span> <span class="nx">title</span><span class="o">=</span><span class="s2">"Selected filters"</span> <span class="nx">collapsable</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">defaultCollapsed</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span><span class="o">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">GroupedSelectedFilters</span><span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="err">/</span><span class="nc">Panel</span><span class="p">&gt;</span>
+</code></pre>

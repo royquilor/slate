@@ -1,0 +1,29 @@
+<h2 id='initial-loader'>Initial loader</h2>
+<p>Initial loader is displayed when Searchkit hasn&#39;t yet received an elasticsearch response.</p>
+<h3 id='example-usage'>Example Usage</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">InitialLoader</span><span class="p">,</span>
+  <span class="nx">HitItemProps</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">InitialLoaderComponent</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">().</span><span class="nx">mix</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"item"</span><span class="p">))</span><span class="si">}</span><span class="p">&gt;</span>
+    loading please wait...
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">50</span><span class="si">}</span> <span class="na">highlightFields=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span><span class="si">}</span> <span class="na">sourceFilter=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span><span class="si">}</span><span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">InitialLoader</span> <span class="na">component=</span><span class="si">{</span><span class="nx">InitialLoaderComponent</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>component</code> <em>(ReactComponent)</em>: React component used to render the contents of <code>InitialLoader</code>.</li>
+</ul>

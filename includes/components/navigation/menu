@@ -1,0 +1,83 @@
+<h2 id='menu'>Menu</h2>
+<p>Provides a way to navigate through results for a single attribute. Only one value can be selected at a time.</p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Pagination</span><span class="p">,</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span><span class="p">,</span>
+  <span class="nx">MenuFilter</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">MenuFilter</span>
+        <span class="na">field=</span><span class="s2">"languages.raw"</span>
+        <span class="na">title=</span><span class="s2">"Languages"</span>
+        <span class="na">id=</span><span class="s2">"languages"</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='overriding-filter-option-component'>Overriding Filter Option Component</h3>
+<p>If you want to tweak the markup for a menu option, you can use the <code>itemComponent</code> prop and pass in a new react component to be used to render each option.</p>
+<pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Pagination</span><span class="p">,</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span><span class="p">,</span>
+  <span class="nx">ItemList</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">MenuFilter</span>
+        <span class="na">field=</span><span class="s2">"languages.raw"</span>
+        <span class="na">title=</span><span class="s2">"Languages"</span>
+        <span class="na">id=</span><span class="s2">"languages"</span>
+        <span class="na">listComponent=</span><span class="si">{</span><span class="nx">ItemList</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>field</code> <em>(ESAttribute)</em>: Non-analysed elastic search field to create aggs for the menu</li>
+<li><code>title</code> <em>(string)</em>: Title of the menu. Shown as a header and within selected filters</li>
+<li><code>id</code> <em>(string)</em>: id of component. Must be unique. Used as key for url serialisation</li>
+<li><code>itemComponent</code> <em>(ReactComponent)</em>: Optional. React component which overrides the default filter option component. See <code>Overriding Filter Option Component</code> section.</li>
+<li><code>listComponent</code> <em>(ReactComponent)</em>: Override the listComponent
+
+<ul>
+<li>Compatible with <code>Select</code>, <code>Tabs</code>, <code>Toggle</code>, <code>TagCloud</code>, <code>ItemList</code>, <code>CheckboxItemList</code>, <code>ItemHistogramList</code></li>
+<li>Defaults to <code>ItemList</code></li>
+</ul></li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>orderKey</code> <em>(string)</em>: Order key either using an intrinsic sortable key <code>_count</code> <code>_term</code></li>
+<li><code>orderDirection</code> <em>(string)</em>: <code>asc</code> or <code>desc</code></li>
+<li><code>include</code> <em>(Array<string>|string):</em> Terms bucket  include parameter see <a href="https://www.elastic.co/guide/en/elasticsearch/reference/2.x/search-aggregations-bucket-terms-aggregation.html#_filtering_values_2">Terms bucket filtering</a></li>
+<li><code>exclude</code> <em>(Array<string>|string):</em> Terms bucket exclude parameter, see above</li>
+<li><code>fieldOptions</code> <em>({type:&quot;embedded|nested|children&quot;, options:Object})</em> Configures the type field that is stored in ElasticSearch, can be <code>embedded</code>(default) <code>nested</code> or <code>children</code>
+
+<ul>
+<li><code>type:nested</code> requires <code>options.path</code> provided</li>
+<li><code>type:children</code> requires <code>options.childType</code> provided</li>
+<li>see <a href="../../core/FieldOptions.md">Field Options</a></li>
+</ul></li>
+<li><code>countFormatter</code> <em>((count:number)=&gt; number|string)</em> A optional function to format the doc counts</li>
+<li><code>bucketsTransform</code> <em>((buckets:Array)=&gt; transformedBuckets)</em> A optional function to transform the buckets used for the aggregation, can be used to sort the list or to inject new facets.</li>
+</ul>
+<h3 id='list-component-examples'>List Component examples</h3>
+<p><img src="./assets/menu-list-components.png"/></p>
+<h3 id='translations'>Translations</h3>
+<ul>
+<li><code>All</code> - All</li>
+</ul>
+<pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">MenuFilter</span>
+  <span class="nx">field</span><span class="o">=</span><span class="s2">"languages.raw"</span>
+  <span class="nx">title</span><span class="o">=</span><span class="s2">"Languages"</span>
+  <span class="nx">id</span><span class="o">=</span><span class="s2">"languages"</span>
+  <span class="nx">translations</span><span class="o">=</span><span class="p">{{</span><span class="s2">"All"</span><span class="p">:</span><span class="s2">"All languages"</span><span class="p">}}</span><span class="sr">/</span><span class="err">&gt;
+</span></code></pre><h3 id='demo'>Demo</h3>
+<iframe height='800' scrolling='no' src='//codepen.io/searchkit/embed/YwNwVm/?height=800&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>

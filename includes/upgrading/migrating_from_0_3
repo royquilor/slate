@@ -1,0 +1,25 @@
+<h2 id='migrating-from-searchkit-0-3-x'>Migrating from Searchkit 0.3.x</h2><h3 id='searchkit-now-uses-lodash-4-0'>Searchkit now uses lodash 4.0</h3>
+<p>The api is identical, but if you get terminal errors during development
+you might need to do a clean npm install.</p>
+<h3 id='rangequery-api-changed'>RangeQuery api changed</h3><pre class="highlight jsx tab-jsx"><code>  <span class="kr">import</span> <span class="p">{</span><span class="nx">RangeQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+  <span class="c1">//before</span>
+  <span class="nx">RangeQuery</span><span class="p">(</span><span class="s2">"price"</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+
+  <span class="c1">//after</span>
+  <span class="nx">RangeQuery</span><span class="p">(</span><span class="s2">"price"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">gte</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span> <span class="na">lt</span><span class="p">:</span><span class="mi">21</span>
+  <span class="p">})</span>
+</code></pre>
+<p>The new RangeQuery api now allows the following options
+<code>typescript
+export interface RangeQueryOptions {
+  lt?:number
+  lte?:number
+  gt?:number
+  gte?:number
+  boost?:number
+  format?:string
+  time_zone?:string
+}
+</code></p>

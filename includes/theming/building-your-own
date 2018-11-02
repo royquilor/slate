@@ -1,0 +1,6 @@
+<h2 id='using-your-own-styles'>Using Your Own Styles</h2>
+<p>If you want to take control of the component&#39;s styling to suit your app, you have a number of options.</p>
+<h3 id='component-39-s-mod-container'>Component&#39;s mod container</h3>
+<p>Most components support a <code>mod</code> prop which allows you to change the component&#39;s BEM block element. Useful for when you want one particular component to be styled different. See component API docs.</p>
+<h3 id='overriding-markup'>Overriding markup</h3>
+<p>Most components support overriding display components via the <code>component</code>, <code>listComponent</code> or <code>itemComponent</code> props. See component API docs.</p>

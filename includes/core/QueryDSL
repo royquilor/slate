@@ -1,0 +1,67 @@
+<h2 id='query-dsl-builders'>Query DSL builders</h2>
+<p><code>Searchkit</code> ships with many query builders to be used internally and externally to searchkit. This is to remove boilerplate and errors when constructing complicated elastic queries.</p>
+<h3 id='term-based-queries'>Term based queries</h3><h4 id='termquery-field-value'><code>TermQuery(field, value)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">TermQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">)</span>
+</code></pre><h4 id='termsquery-field-values'><code>TermsQuery(field, values)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">TermsQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">TermsQuery</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"red"</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">])</span>
+</code></pre><h4 id='existsquery-field'><code>ExistsQuery(field)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">ExistsQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">ExistsQuery</span><span class="p">(</span><span class="s2">"color"</span><span class="p">)</span>
+</code></pre><h4 id='rangequery-field-options'><code>RangeQuery(field, options)</code></h4>
+<p>Available options: lt, lte, gt, gte, boost, format, time_zone</p>
+
+<p>Numeric Range:</p>
+<pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">RangeQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">RangeQuery</span><span class="p">(</span><span class="s2">"rating"</span><span class="p">,</span>  <span class="p">{</span><span class="na">gte</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">lt</span><span class="p">:</span> <span class="mi">11</span> <span class="p">})</span>
+<span class="cm">/* {
+  range:{
+    rating: { gte:1, lt:11 }
+  }
+} */</span>
+</code></pre>
+<p>Date Range:</p>
+<pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">RangeQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">RangeQuery</span><span class="p">(</span><span class="s2">"date_received"</span><span class="p">,</span> <span class="p">{</span> <span class="na">gte</span><span class="p">:</span> <span class="s2">"2005||/y"</span> <span class="p">})</span>
+<span class="cm">/* {
+  range: {
+    date_received: { gte: "2005||/y" }
+  }
+} */</span>
+</code></pre><h3 id='compound-queries'>Compound queries</h3><h4 id='boolmust-filter'><code>BoolMust(filter)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">BoolMust</span><span class="p">,</span> <span class="nx">TermQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="c1">//array</span>
+<span class="nx">BoolMust</span><span class="p">([</span>
+  <span class="nx">Term</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">),</span>
+  <span class="nx">Term</span><span class="p">(</span><span class="s2">"brand"</span><span class="p">,</span> <span class="s2">"boss"</span><span class="p">)</span>
+<span class="p">])</span>
+<span class="c1">//single filter</span>
+<span class="nx">BoolMust</span><span class="p">(</span><span class="nx">Term</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">))</span>
+</code></pre><h4 id='boolmustnot-filter'><code>BoolMustNot(filter)</code></h4>
+<p>See BoolMust</p>
+<h4 id='boolshould-filter'><code>BoolShould(filter)</code></h4>
+<p>See BoolMust</p>
+<h4 id='filteredquery-filteredob'><code>FilteredQuery(filteredOb)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">FilteredQuery</span><span class="p">,</span> <span class="nx">MatchQuery</span><span class="p">,</span> <span class="nx">TermQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">FilteredQuery</span><span class="p">({</span>
+  <span class="na">query</span><span class="p">:</span><span class="nx">MatchQuery</span><span class="p">(</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"Star Wars"</span><span class="p">),</span>
+  <span class="na">filter</span><span class="p">:</span><span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"genre"</span><span class="p">,</span> <span class="s2">"Action"</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre><h3 id='full-text-based-queries'>Full text based queries</h3><h4 id='matchquery-field-query-options'><code>MatchQuery(field, query, options)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">MatchQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">MatchQuery</span><span class="p">(</span><span class="s2">"color"</span><span class="p">,</span> <span class="s2">"red yellow"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">operator</span><span class="p">:</span><span class="s1">'AND'</span>
+    <span class="c1">//...other match query options</span>
+<span class="p">})</span>
+</code></pre><h4 id='matchphraseprefix-query-str'><code>MatchPhrasePrefix(query, str)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">MatchPhrasePrefix</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">MatchPhrasePrefix</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'spide'</span><span class="p">)</span>
+<span class="c1">//with optional boost</span>
+<span class="nx">MatchPhrasePrefix</span><span class="p">(</span><span class="s1">'title^10'</span><span class="p">,</span> <span class="s1">'spide'</span><span class="p">)</span>
+</code></pre><h4 id='multimatchquery-query-options'><code>MultiMatchQuery(query, options)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">MultiMatchQuery</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">MultiMatchQuery</span><span class="p">(</span><span class="s2">"red"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">fields</span><span class="p">:[</span><span class="s2">"color"</span><span class="p">,</span> <span class="s2">"song_title"</span><span class="p">],</span>
+    <span class="na">operator</span><span class="p">:</span><span class="s2">"OR"</span>
+  <span class="c1">//.. other multi match query options</span>
+<span class="p">})</span>
+</code></pre><h4 id='simplequerystring-query-options'><code>SimpleQueryString(query, options)</code></h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">SimpleQueryString</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="nx">SimpleQueryString</span><span class="p">(</span><span class="s2">"red AND blue"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">fields</span><span class="p">:[</span><span class="s2">"color"</span><span class="p">,</span> <span class="s2">"song_title"</span><span class="p">],</span>
+    <span class="na">operator</span><span class="p">:</span><span class="s2">"OR"</span>
+  <span class="c1">//.. other simple query options</span>
+<span class="p">})</span>
+</code></pre>

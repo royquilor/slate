@@ -1,0 +1,8 @@
+<h1 id='theming'>Theming</h1>
+<p>Searchkit provides out of the box css and theme to make it easier for developers to use Searchkit and also offers flexibility in implementing your own styles to customising the components display via display components.</p>
+
+<ul>
+<li><a href="using-searchkit-theme.md">Using Searchkit&#39;s Theme</a></li>
+<li><a href="extending-searchkit-theme.md">Extending Searchkit&#39;s Theme</a></li>
+<li><a href="building-your-own.md">Building Your Own</a></li>
+</ul>

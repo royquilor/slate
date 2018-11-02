@@ -1,0 +1,44 @@
+<h2 id='using-express'>Using Express</h2>
+<p><code>Searchkit</code> ships with an express plugin to proxy api calls to ElasticSearch</p>
+
+<blockquote>
+<p><strong>Note</strong> The use of a proxy is optional, you can configure the <code>Searchkit</code> client to connect directly to an <code>ElasticSearch</code> server</p>
+</blockquote>
+<h3 id='installation'>Installation</h3><pre class="highlight sh tab-shell"><code>npm install searchkit-express --save
+</code></pre><pre class="highlight javascript"><code><span class="nx">SearchkitExpress</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">"searchkit-express"</span><span class="p">)</span>
+</code></pre><pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+<span class="c1">//...</span>
+
+<span class="nx">SearchkitExpress</span><span class="p">({</span>
+  <span class="na">host</span><span class="p">:</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ELASTIC_URL</span> <span class="o">||</span> <span class="s2">"http://localhost:9200"</span><span class="p">,</span>  
+  <span class="na">index</span><span class="p">:</span><span class="s1">'movies'</span><span class="p">,</span>
+  <span class="na">queryProcessor</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+    <span class="c1">//do neccessery permissions, prefilters to query object</span>
+    <span class="c1">//then return it</span>
+    <span class="k">return</span> <span class="nx">query</span>
+  <span class="p">}</span>
+ <span class="p">},</span> <span class="nx">app</span><span class="p">)</span>
+</code></pre>
+<p>This will add the following endpoints to your root url which will route to the <code>movies</code> index on your elasticsearch instance
+ * <code>POST /_search</code></p>
+<h4 id='custom-router'>Custom router</h4>
+<p>If you wish to prefix the url or control the middleware for these particular routes <code>SearchkitExpress</code> allows manual creation of an <code>express.Router</code></p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">()</span>
+
+<span class="c1">//...</span>
+
+<span class="kd">var</span> <span class="nx">searchkitRouter</span> <span class="o">=</span> <span class="nx">SearchkitExpress</span><span class="p">.</span><span class="nx">createRouter</span><span class="p">({</span>
+  <span class="na">host</span><span class="p">:</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">ELASTIC_URL</span> <span class="o">||</span> <span class="s2">"http://localhost:9200"</span><span class="p">,</span>  
+  <span class="na">index</span><span class="p">:</span><span class="s1">'movies'</span><span class="p">,</span>
+  <span class="na">queryProcessor</span><span class="p">:</span><span class="kd">function</span><span class="p">(</span><span class="nx">query</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span>    
+    <span class="k">return</span> <span class="nx">query</span>
+  <span class="p">}</span>
+ <span class="p">})</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s2">"/movie-search"</span><span class="p">,</span> <span class="nx">searchkitRouter</span><span class="p">)</span>
+</code></pre>
+<p>This will result in the following api endpoints</p>
+
+<ul>
+<li><code>POST /movie-search/_search</code></li>
+</ul>

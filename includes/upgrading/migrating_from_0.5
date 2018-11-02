@@ -1,0 +1,8 @@
+<h2 id='migrating-from-searchkit-0-5-x'>Migrating from Searchkit 0.5.x</h2><h3 id='hits-sourcefilter-property'>Hits sourceFilter property</h3>
+<p><code>Hits</code> now supports the <code>sourceFilter</code> prop, we strongly advise you to use this as it will speed up your search and reduce a lot of wasted bandwidth.
+<code>jsx
+&lt;Hits hitsPerPage={50} sourceFilter={[&quot;title&quot;, &quot;poster&quot;, &quot;imdbId&quot;]} itemComponent={HitItem}/&gt;
+</code></p>
+<h3 id='hitstats-component-overrides'>HitStats component overrides</h3>
+<p>If you previously extended <code>HitStats</code> in order to customize the component, please switch to using the <code>component</code> prop.
+More details can be found in the <a href="../components/metadata/stats.md">HitStats documentation</a></p>

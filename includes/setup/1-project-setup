@@ -1,0 +1,36 @@
+<h2 id='project-setup'>Project Setup</h2>
+<p>Our recommended project setup is using webpack and typescript. We also support using searchkit with ES6 / Webpack and using normal library script file. Installing via NPM is recommended.</p>
+<h3 id='using-module'>Using Module</h3>
+<p>We recommend using webpack for module dependency management of Searchkit&#39;s src, css and static assets. requires scss, file loaders to properly resolve searchkit dependencies. See <a href="http://github.com/searchkit/searchkit-boilerplate">searchkit boilerplate</a>.</p>
+<h3 id='installing-via-npm'>Installing via NPM</h3>
+<p>Searchkit is available on <a href="http://npmjs.com/package/searchkit">npm</a>. Searchkit is written with typescript therefore typescript definition files are available.</p>
+<pre class="highlight sh tab-shell"><code>npm install searchkit --save
+</code></pre>
+<blockquote>
+<p>Importing with webpack / ES6</p>
+</blockquote>
+<pre class="highlight javascript"><code>
+<span class="kr">import</span> <span class="p">{</span>
+    <span class="nx">SearchBox</span><span class="p">,</span>
+    <span class="nx">RefinementListFilter</span><span class="p">,</span>
+    <span class="nx">Hits</span><span class="p">,</span>
+    <span class="nx">HitsStats</span><span class="p">,</span>
+    <span class="nx">SearchkitComponent</span><span class="p">,</span>
+    <span class="nx">SelectedFilters</span><span class="p">,</span>
+    <span class="nx">MenuFilter</span><span class="p">,</span>
+    <span class="nx">HierarchicalMenuFilter</span><span class="p">,</span>
+    <span class="nx">Pagination</span><span class="p">,</span>
+    <span class="nx">ResetFilters</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+</code></pre><h3 id='using-library-script'>Using library script</h3>
+<p>Searchkit library script is available from bower or from <a href="https://www.jsdelivr.com/package/npm/searchkit?path=release">jsdelivr CDN</a>.</p>
+
+<blockquote>
+<p>CDN Script include</p>
+</blockquote>
+<pre class="highlight html tab-html"><code>    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"//cdn.jsdelivr.net/npm/searchkit@2.3.0-9/release/theme.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//cdn.jsdelivr.net/npm/react@16.0.0/umd/react.production.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//cdn.jsdelivr.net/npm/react-dom@16.0.0/umd/react-dom.production.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//cdn.jsdelivr.net/npm/searchkit@2.3.0-9/release/bundle.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre>

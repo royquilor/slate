@@ -1,0 +1,58 @@
+<h2 id='translate'>Translate</h2>
+<p>All components run a translate function on any text displayed. This includes:</p>
+
+<ul>
+<li>filter options (for when options are ids and required to be rendered in text)</li>
+<li>previous / next navigation</li>
+<li>show more / show less / show all action text</li>
+<li>search placeholder</li>
+</ul>
+
+<p>and many more in components.</p>
+<h3 id='interpolations'>Interpolations</h3>
+<p>Some translations contain interpolations, E.g. <code>NoHits.NoResultsFound</code> which has a default translation of <code>No results found for {query}.</code> which means the component will provide the query value.</p>
+<h3 id='how-to-override-global-defaults'>How to override global defaults</h3><pre class="highlight javascript"><code>
+<span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"locahost:9200"</span><span class="p">)</span>
+
+<span class="nx">searchkit</span><span class="p">.</span><span class="nx">translateFunction</span> <span class="o">=</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">translations</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"pagination.previous"</span><span class="p">:</span><span class="s2">"Previous page"</span><span class="p">,</span>
+    <span class="s2">"pagination.next"</span><span class="p">:</span><span class="s2">"Next page"</span><span class="p">,</span>
+    <span class="s2">"id1"</span><span class="p">:</span><span class="s2">"Color"</span><span class="p">,</span>
+    <span class="s2">"id2"</span><span class="p">:</span> <span class="s2">"Red"</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">translations</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre><h3 id='override-component-defaults'>Override component defaults</h3>
+<p>You can pass any component an object of translations you wish to override. Example below:</p>
+<pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">SearchBox</span> <span class="nx">translations</span><span class="o">=</span><span class="p">{{</span><span class="s2">"searchbox.placeholder"</span><span class="p">:</span><span class="s2">"search movies"</span><span class="p">}}</span> <span class="nx">autofocus</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">searchOnChange</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">queryFields</span><span class="o">=</span><span class="p">{[</span><span class="s2">"actors^1"</span><span class="p">,</span><span class="s2">"type^2"</span><span class="p">,</span><span class="s2">"languages"</span><span class="p">,</span><span class="s2">"title^5"</span><span class="p">,</span> <span class="s2">"genres^2"</span><span class="p">]}</span><span class="sr">/</span><span class="err">&gt;
+</span></code></pre><h3 id='list-of-some-of-the-translation-overrides-with-their-defaults'>List of some of the translation overrides with their defaults</h3><h4 id='resetfilters'>ResetFilters</h4>
+<ul>
+<li><code>reset.clear_all</code> - Clear All Filters</li>
+</ul>
+<h4 id='refinementlistfilter'>RefinementListFilter</h4>
+<ul>
+<li><code>facets.view_more</code> - View more</li>
+<li><code>facets.view_less</code> - View less</li>
+<li><code>facets.view_all</code> - View all</li>
+</ul>
+<h4 id='nohits'>NoHits</h4>
+<ul>
+<li><code>NoHits.NoResultsFound</code> - No results found for {query}.</li>
+<li><code>NoHits.DidYouMean</code> - Search for {suggestion}.</li>
+<li><code>NoHits.SearchWithoutFilters</code> - Search for {query} without filters</li>
+<li><code>NoHits.NoResultsFoundDidYouMean</code>:No results found for {query}. Did you mean {suggestion}?</li>
+</ul>
+<h4 id='hitstats'>HitStats</h4>
+<ul>
+<li><code>hitstats.results_found</code> - {hitCount} results found in {timeTaken}ms</li>
+</ul>
+<h4 id='pagination'>Pagination</h4>
+<ul>
+<li><code>pagination.previous</code> - Previous</li>
+<li><code>pagination.next</code> - Next</li>
+</ul>
+<h4 id='searchbox'>Searchbox</h4>
+<ul>
+<li><code>searchbox.placeholder</code> - &quot;Search&quot;</li>
+</ul>

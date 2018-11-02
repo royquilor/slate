@@ -1,0 +1,52 @@
+<h2 id='numeric-refinement-list'>Numeric Refinement List</h2>
+<p>Allows the user to refine results based on a numerical elasticsearch attribute. You specify an array of options for the user to select from. Will only allow the user to select one.</p>
+
+<p><img src="./assets/numeric-itemlist.png" height="200px"/></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">NumericRefinementListFilter</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">NumericRefinementListFilter</span> <span class="na">id=</span><span class="s2">"metascore"</span> <span class="na">title=</span><span class="s2">"Meta score"</span> <span class="na">field=</span><span class="s2">"metaScore"</span> <span class="na">options=</span><span class="si">{</span><span class="p">[</span>
+        <span class="p">{</span><span class="na">title</span><span class="p">:</span><span class="s2">"All"</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">title</span><span class="p">:</span><span class="s2">"up to 20"</span><span class="p">,</span> <span class="na">from</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="na">to</span><span class="p">:</span><span class="mi">21</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">title</span><span class="p">:</span><span class="s2">"21 to 40"</span><span class="p">,</span> <span class="na">from</span><span class="p">:</span><span class="mi">21</span><span class="p">,</span> <span class="na">to</span><span class="p">:</span><span class="mi">41</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">title</span><span class="p">:</span><span class="s2">"41 to 60"</span><span class="p">,</span> <span class="na">from</span><span class="p">:</span><span class="mi">41</span><span class="p">,</span> <span class="na">to</span><span class="p">:</span><span class="mi">61</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">title</span><span class="p">:</span><span class="s2">"61 to 80"</span><span class="p">,</span> <span class="na">from</span><span class="p">:</span><span class="mi">61</span><span class="p">,</span> <span class="na">to</span><span class="p">:</span><span class="mi">81</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">title</span><span class="p">:</span><span class="s2">"81 to 100"</span><span class="p">,</span> <span class="na">from</span><span class="p">:</span><span class="mi">81</span><span class="p">,</span> <span class="na">to</span><span class="p">:</span><span class="mi">101</span><span class="p">}</span>
+      <span class="p">]</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>field</code> <em>(ESAttribute)</em>: Non-analysed elastic search field to create aggs for the menu</li>
+<li><code>options</code> <em>([{title:string, from?:number, to?:number, key?:string}])</em>: Options displayed for the user to refine results with. The key property will be used for url serialization, searchkit will generate if not provided.</li>
+<li><code>title</code> <em>(string)</em>: Title of the menu. Shown as a header and within selected filters</li>
+<li><code>id</code> <em>(string)</em>: id of component. Must be unique. Used as key for url serialisation</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>multiselect</code> <em>(boolean)</em>: Whether component should behave like a multiple select, defaults to <code>false</code></li>
+<li><code>showCount</code> <em>(boolean)</em>: Whether component should show facet counts, defaults to <code>true</code></li>
+<li><code>listComponent</code> <em>(React Component)</em>: Customize the rendering of the component at the list level
+
+<ul>
+<li>Compatible with <code>Select</code>, <code>Tabs</code>, <code>Toggle</code>, <code>TagCloud</code>, <code>ItemList</code>, <code>CheckboxItemList</code>, <code>ItemHistogramList</code></li>
+<li>Defaults to <code>ItemList</code></li>
+</ul></li>
+<li><code>itemComponent</code> <em>(React Component)</em>: Customize each row/item rendering within the list.</li>
+<li><code>fieldOptions</code> <em>({type:&quot;embedded|nested|children&quot;, options:Object})</em> Configures the type field that is stored in ElasticSearch, can be <code>embedded</code>(default) <code>nested</code> or <code>children</code>
+
+<ul>
+<li><code>type:nested</code> requires <code>options.path</code> provided</li>
+<li><code>type:children</code> requires <code>options.childType</code> provided</li>
+<li>see <a href="../../core/FieldOptions.md">Field Options</a></li>
+</ul></li>
+<li><code>countFormatter</code> <em>((count:number)=&gt; number|string)</em> A optional function to format the doc counts</li>
+</ul>
+<h3 id='demo'>Demo</h3>
+<iframe height='800' scrolling='no' src='//codepen.io/searchkit/embed/bEgERB/?height=800&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>

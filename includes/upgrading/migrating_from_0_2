@@ -1,0 +1,27 @@
+<h2 id='migrating-from-searchkit-0-2-0'>Migrating from Searchkit 0.2.0</h2><h3 id='removed-config-classes'>Removed config + classes</h3><h4 id='multiplesearchers-removed'>multipleSearchers removed</h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span><span class="nx">SearchkitManager</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+<span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"/"</span><span class="p">,</span> <span class="p">{</span><span class="na">multipleSearchers</span><span class="p">:</span><span class="kc">false</span><span class="p">}</span>
+<span class="c1">//becomes</span>
+<span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+</code></pre><h4 id='searcher-searcherprovider-removed'>Searcher + SearcherProvider removed</h4><pre class="highlight javascript"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Searcher</span><span class="p">,</span>
+  <span class="nx">SearcherProvider</span><span class="p">,</span>
+  <span class="nx">SearchkitManager</span><span class="p">,</span>
+  <span class="nx">SearchkitProvider</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="c1">//becomes</span>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">SearchkitManager</span><span class="p">,</span>
+  <span class="nx">SearchkitProvider</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+</code></pre><h3 id='hits-component-no-longer-renders-blank-state'>Hits component no longer renders blank state</h3>
+<p>We have moved the no results found text + ui into a new <a href="../components/basics/nohits.md">NoHits Component</a>
+```jsx
+//0.2
+<Hits hitsPerPage={10}/></p>
+
+<p>//0.3.x
+<Hits hitsPerPage={10}/>
+<NoHits/>
+```</p>

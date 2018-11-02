@@ -1,0 +1,46 @@
+<h2 id='layout-components'>Layout Components</h2>
+<p>Default set of layout components provided by Searchkit which work with Searchkit&#39;s default theme.</p>
+
+<p><img src="./assets/layout-components.png" /></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">searchkit</span><span class="p">}</span><span class="o">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Layout</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">TopBar</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">SearchBox</span>
+        <span class="na">autofocus=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span>
+        <span class="na">searchOnChange=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span>
+        <span class="na">prefixQueryFields=</span><span class="si">{</span><span class="p">[</span><span class="s2">"actors^1"</span><span class="p">,</span><span class="s2">"type^2"</span><span class="p">,</span><span class="s2">"languages"</span><span class="p">,</span><span class="s2">"title^10"</span><span class="p">]</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">TopBar</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">LayoutBody</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">SideBar</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">HierarchicalMenuFilter</span>
+          <span class="na">fields=</span><span class="si">{</span><span class="p">[</span><span class="s2">"type.raw"</span><span class="p">,</span> <span class="s2">"genres.raw"</span><span class="p">]</span><span class="si">}</span>
+          <span class="na">title=</span><span class="s2">"Categories"</span>
+          <span class="na">id=</span><span class="s2">"categories"</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nc">RefinementListFilter</span>
+          <span class="na">id=</span><span class="s2">"actors"</span>
+          <span class="na">title=</span><span class="s2">"Actors"</span>
+          <span class="na">field=</span><span class="s2">"actors.raw"</span>
+          <span class="na">operator=</span><span class="s2">"AND"</span>
+          <span class="na">size=</span><span class="si">{</span><span class="mi">10</span><span class="si">}</span><span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">SideBar</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">LayoutResults</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">ActionBar</span><span class="p">&gt;</span>
+
+          <span class="p">&lt;</span><span class="nc">ActionBarRow</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">HitsStats</span><span class="p">/&gt;</span>
+          <span class="p">&lt;/</span><span class="nc">ActionBarRow</span><span class="p">&gt;</span>
+
+          <span class="p">&lt;</span><span class="nc">ActionBarRow</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">SelectedFilters</span><span class="p">/&gt;</span>
+            <span class="p">&lt;</span><span class="nc">ResetFilters</span><span class="p">/&gt;</span>
+          <span class="p">&lt;/</span><span class="nc">ActionBarRow</span><span class="p">&gt;</span>
+
+        <span class="p">&lt;/</span><span class="nc">ActionBar</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">mod=</span><span class="s2">"sk-hits-grid"</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">10</span><span class="si">}</span> <span class="na">itemComponent=</span><span class="si">{</span><span class="nx">MovieHitsGridItem</span><span class="si">}</span>
+          <span class="na">sourceFilter=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"poster"</span><span class="p">,</span> <span class="s2">"imdbId"</span><span class="p">]</span><span class="si">}</span><span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nc">NoHits</span><span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">LayoutResults</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">LayoutBody</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nc">Layout</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="err">/</span><span class="nc">SearchkitProvider</span><span class="p">&gt;</span>
+</code></pre>

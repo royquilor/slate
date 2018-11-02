@@ -1,0 +1,24 @@
+<h2 id='default-queries'>Default Queries</h2>
+<p>Sometimes we need to apply a default query which affects the entire search and is not serialized to the browser url.</p>
+
+<p><code>SearchkitManager</code> allows ability to add these</p>
+<pre class="highlight javascript"><code>  <span class="kr">import</span> <span class="p">{</span>
+    <span class="nx">SearchkitManager</span><span class="p">,</span>
+    <span class="nx">TermQuery</span><span class="p">,</span>
+    <span class="nx">BoolMust</span>
+  <span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+  <span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"/"</span><span class="p">);</span>
+  <span class="nx">searchkit</span><span class="p">.</span><span class="nx">addDefaultQuery</span><span class="p">((</span><span class="nx">query</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">query</span><span class="p">.</span><span class="nx">addQuery</span><span class="p">(</span><span class="nx">BoolMust</span><span class="p">([</span>
+        <span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"colour"</span><span class="p">,</span> <span class="s2">"red"</span><span class="p">),</span>
+        <span class="nx">TermQuery</span><span class="p">(</span><span class="s2">"colour"</span><span class="p">,</span> <span class="s2">"orange"</span><span class="p">)</span>
+      <span class="p">])</span>
+    <span class="p">);</span>
+  <span class="p">})</span>
+</code></pre><h3 id='immutablequery-querybuilders'>ImmutableQuery + QueryBuilders</h3>
+<p>To see more detail on these apis have a look at these pages</p>
+
+<ul>
+<li><a href="../core/ImmutableQuery.md">ImmutableQuery</a></li>
+<li><a href="../core/QueryDSL.md">QueryDSL</a></li>
+</ul>

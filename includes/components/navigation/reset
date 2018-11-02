@@ -1,0 +1,70 @@
+<h2 id='reset'>Reset</h2>
+<p>This component clears all the selected filters and search query that are currently applied.</p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">ResetFilters</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ResetFilters</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='overriding-display-component'>Overriding Display Component</h3>
+<p>If you want to tweak the markup for reset filters, you can use the <code>component</code> prop and pass in a React Component to be used to render the reset button.</p>
+<pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">ResetFilters</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">ResetFiltersDisplay</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+    <span class="nx">render</span><span class="p">(){</span>
+        <span class="kr">const</span> <span class="p">{</span><span class="nx">bemBlock</span><span class="p">,</span> <span class="nx">hasFilters</span><span class="p">,</span> <span class="nx">translate</span><span class="p">,</span> <span class="nx">resetFilters</span><span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">onClick=</span><span class="si">{</span><span class="nx">resetFilters</span><span class="si">}</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlock</span><span class="p">().</span><span class="nx">state</span><span class="p">({</span><span class="na">disabled</span><span class="p">:</span><span class="o">!</span><span class="nx">hasFilters</span><span class="p">})</span><span class="si">}</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlock</span><span class="p">(</span><span class="s2">"reset"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">translate</span><span class="p">(</span><span class="s2">"reset.clear_all"</span><span class="p">)</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ResetFilters</span> <span class="na">component=</span><span class="si">{</span><span class="nx">ResetFiltersDisplay</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>component</code> <em>(ReactComponent)</em>: Optional. Used to override the default display of reset filters. See <code>Overriding Display Component</code> section.</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>options</code> <em>(object)</em>: An object containing <code>{query:true|false, filter:true|false, pagination:true|false}</code> which controls which parts of the search are reset and influence the disabled state. Defaults to <code>{query:true, filter:true, pagination:true}</code></li>
+</ul>
+<h3 id='translations'>Translations</h3>
+<ul>
+<li><code>reset.clear_all</code> - Clear All Filters</li>
+</ul>
+<h3 id='example-overriding-the-translation'>Example overriding the translation</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">ResetFilters</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">ResetFilters</span> <span class="na">translations=</span><span class="si">{</span><span class="p">{</span><span class="s2">"reset.clear_all"</span><span class="p">:</span><span class="s2">"Reset all filters"</span><span class="p">}</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>

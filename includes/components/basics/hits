@@ -1,0 +1,97 @@
+<h2 id='hits'>Hits</h2>
+<p>Hits component displays results from ElasticSearch. To customize each result, you need to implement a React component and pass into <code>itemComponent</code> prop.
+The component will receive a single <code>hit</code> object from the search results, which will include <code>result._source</code> which contains the untouched stored fields which were indexed.</p>
+
+<p><img src="/includes/components/basics/assets/hits-grid.png" alt="Example" /></p>
+<h3 id='example-usage'>Example Usage</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span> <span class="nx">get</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"lodash"</span><span class="p">;</span>
+
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span><span class="p">,</span>
+  <span class="nx">HitItemProps</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">HitItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">().</span><span class="nx">mix</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"item"</span><span class="p">))</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"poster"</span><span class="p">)</span><span class="si">}</span> <span class="na">src=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">poster</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"title"</span><span class="p">)</span><span class="si">}</span> <span class="na">dangerouslySetInnerHTML=</span><span class="si">{</span><span class="p">{</span><span class="na">__html</span><span class="p">:</span> <span class="nx">get</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">result</span><span class="p">,</span><span class="s2">"highlight.title"</span><span class="p">,</span><span class="nx">props</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">title</span><span class="p">)}</span><span class="si">}</span><span class="p">&gt;&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">50</span><span class="si">}</span> <span class="na">highlightFields=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">]</span><span class="si">}</span> <span class="na">sourceFilter=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"poster"</span><span class="p">,</span> <span class="s2">"imdbId"</span><span class="p">]</span><span class="si">}</span>
+      <span class="na">mod=</span><span class="s2">"sk-hits-grid"</span> <span class="na">itemComponent=</span><span class="si">{</span><span class="nx">HitItem</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>hitsPerPage</code> <em>(Number)?</em>: Number of results displayed per page</li>
+<li><code>highlightFields</code> <em>(Array<string>)</em>: Array of highlighted fields. Any highlight matches will be returned in the result.highlight[fieldName]. See above for example.</li>
+<li><code>customHighlight</code> <em>(Object)</em>: Optional. Allows any custom highlight behavior to control the number of fragments, fragment sizes, and highlighter. Passed through directly to elasticsearch as the value for <code>highlight</code>. See the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-highlighting.html">elastic documentation</a> for further details.</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.
+
+<ul>
+<li>Searchkit ships with defaults for <code>sk-hits-grid</code> and <code>sk-hits-list</code></li>
+</ul></li>
+<li><code>itemComponent</code> <em>(ReactComponent)</em>: React component used for each hit render.</li>
+<li><code>listComponent</code> <em>(ReactComponent)</em>: React component used if you want to control the full list of results (e.g. make a table component)</li>
+<li><code>sourceFilter</code> <em>(string|boolean|Array<string>)</em>: A source filter parameter which is sent to elasticsearch to reduce the hit <code>_source</code> data within the results. see the <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-source-filtering.html">elastic documentation</a> for further details.</li>
+<li><code>scrollTo</code> <em>(string|boolean)</em>: When results have changed, we scroll to the top of the element using the jQuery style selector passed in the <code>scrollTo</code> prop. If true, it will use the body as the selector.  Default value is true. If false, it will not scroll when new results are rendered. We determine a change by comparing hits <code>_id</code> field with the new results.</li>
+</ul>
+<h3 id='searchkit-theming-styles'>Searchkit Theming styles</h3>
+<p>Searchkit ships out the box with 2 styles of search results which are controlled via the <code>mod</code> property</p>
+
+<ul>
+<li><code>sk-hits-grid</code> grid styling</li>
+<li><code>sk-hits-list</code> List styling</li>
+</ul>
+<h3 id='table-list-example-using-listcomponent'>Table List example using listComponent</h3>
+<p><img src="/includes/components/basics/assets/hits-table.png" alt="Table example" /></p>
+<pre class="highlight jsx tab-jsx"><code><span class="kr">class</span> <span class="nx">MovieHitsTable</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="kr">const</span> <span class="p">{</span> <span class="nx">hits</span> <span class="p">}</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span><span class="na">width</span><span class="p">:</span> <span class="s1">'100%'</span><span class="p">,</span> <span class="na">boxSizing</span><span class="p">:</span> <span class="s1">'border-box'</span><span class="p">,</span> <span class="na">padding</span><span class="p">:</span> <span class="mi">8</span><span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">table</span> <span class="na">className=</span><span class="s2">"sk-table sk-table-striped"</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span><span class="na">width</span><span class="p">:</span> <span class="s1">'100%'</span><span class="p">,</span> <span class="na">boxSizing</span><span class="p">:</span> <span class="s1">'border-box'</span><span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">thead</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">tr</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Title<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Year<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+              <span class="p">&lt;</span><span class="nt">th</span><span class="p">&gt;</span>Rating<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+          <span class="p">&lt;/</span><span class="nt">thead</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">tbody</span><span class="p">&gt;</span>
+            <span class="si">{</span><span class="nx">map</span><span class="p">(</span><span class="nx">hits</span><span class="p">,</span> <span class="nx">hit</span> <span class="o">=&gt;</span> <span class="p">(</span>
+              <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">key=</span><span class="si">{</span><span class="nx">hit</span><span class="p">.</span><span class="nx">_id</span><span class="si">}</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span><span class="na">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">padding</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">width</span><span class="p">:</span> <span class="mi">40</span><span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+                  <span class="p">&lt;</span><span class="nt">img</span> <span class="nt">data</span><span class="err">-</span><span class="na">qa=</span><span class="s2">"poster"</span> <span class="na">src=</span><span class="si">{</span><span class="nx">hit</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">poster</span><span class="si">}</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span><span class="na">width</span><span class="p">:</span> <span class="mi">40</span><span class="p">}</span><span class="si">}</span><span class="p">/&gt;</span>
+                <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">hit</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">hit</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">year</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">td</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">hit</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">imdbRating</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+              <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+            <span class="p">))</span><span class="si">}</span>
+          <span class="p">&lt;/</span><span class="nt">tbody</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">table</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">50</span><span class="si">}</span> <span class="na">sourceFilter=</span><span class="si">{</span><span class="p">[</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"poster"</span><span class="p">,</span> <span class="s2">"imdbId"</span><span class="p">,</span> <span class="s2">"imdbRating"</span><span class="p">]</span><span class="si">}</span> <span class="na">listComponent=</span><span class="si">{</span><span class="nx">MovieHitsTable</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='demo'>Demo</h3>
+<iframe height='800' scrolling='no' src='//codepen.io/searchkit/embed/vLgLOw/?height=800&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>

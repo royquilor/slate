@@ -1,0 +1,12 @@
+<h2 id='extending-theme'>Extending Theme</h2>
+<p>You want to use the layout but want to adjust the colors, fonts to suit your app. Searchkit&#39;s Theming uses a set of <a href="https://github.com/searchkit/searchkit/blob/develop/theming/vars.scss">default SCSS variables</a>.</p>
+
+<p>You can override the defaults by importing <code>theme.scss</code> into your own project and overriding the variables.</p>
+
+<p>Example in webpack sass loader</p>
+<pre class="highlight sass tab-sass"><code>
+<span class="nv">$sk-action-text-color</span><span class="p">:</span> <span class="no">red</span><span class="err">;</span>
+
+<span class="k">@import</span> <span class="s">"~searchkit/theming/theme.scss";</span>
+
+</code></pre>

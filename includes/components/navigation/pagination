@@ -1,0 +1,37 @@
+<h2 id='pagination'>Pagination</h2>
+<p>The pagination component provides ability to go to next and previous page.</p>
+
+<p><img src="/includes/components/navigation/assets/pagination.png" alt="Example" /></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Pagination</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Pagination</span> <span class="na">showNumbers=</span><span class="si">{</span><span class="kc">true</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>showNumbers</code> <em>(Boolean)</em>: Display pagination page links. Defaults to <code>false</code>.</li>
+<li><code>showLast</code> <em>(Boolean)</em>: Whether to show last page (often slow in ElasticSearch ), defaults to <code>false</code></li>
+<li><code>showText</code> <em>(Boolean)</em>: Whether to display previous, next + dividers. Useful to switch off when using Select component.
+defaults to <code>true</code></li>
+<li><code>pageScope</code> <em>(Number)</em>: When using <code>showNumber={true}</code>, how many page numbers to show before and after the current page number. Defaults to <code>3</code></li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>listComponent</code> <em>(React Component)</em>: Used to change the rendering.</li>
+</ul>
+<h3 id='paginationselect'>PaginationSelect</h3>
+<p>If you would like a more compact rendering, you can use Searchkit&#39;s <code>PaginationSelect component instead</code></p>
+<pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">PaginationSelect</span><span class="o">/&gt;</span>
+</code></pre><h3 id='translations'>Translations</h3>
+<ul>
+<li><code>pagination.previous</code> - Previous</li>
+<li><code>pagination.next</code> - Next</li>
+</ul>

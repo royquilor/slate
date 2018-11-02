@@ -1,0 +1,34 @@
+<h2 id='fieldoptions'>FieldOptions</h2>
+<p><code>Searchkit</code> allows customizing certain components for use with <code>nested</code> or <code>children</code> fields</p>
+<h3 id='supported-components'>Supported components</h3>
+<ul>
+<li>RefinementListFilter</li>
+<li>MenuFilter</li>
+<li>RangeFilter</li>
+<li>NumericRefinementListFilter</li>
+<li>DynamicRangeFilter</li>
+</ul>
+<h3 id='nested-example'>Nested Example</h3><pre class="highlight jsx tab-jsx"><code>  <span class="o">&lt;</span><span class="nx">RefinementListFilter</span>
+    <span class="nx">id</span><span class="o">=</span><span class="s2">"embeddedTags"</span>
+    <span class="nx">title</span><span class="o">=</span> <span class="s2">"Embedded Tags"</span>
+    <span class="nx">field</span><span class="o">=</span><span class="s1">'tags.name'</span>
+    <span class="nx">fieldOptions</span><span class="o">=</span><span class="p">{{</span><span class="na">type</span><span class="p">:</span><span class="s1">'nested'</span><span class="p">,</span> <span class="na">options</span><span class="p">:{</span><span class="na">path</span><span class="p">:</span><span class="s1">'tags'</span><span class="p">}}}</span><span class="sr">/&gt;   </span><span class="err"> 
+</span></code></pre><h4 id='fieldoptions-options-type-39-nested-39'>fieldOptions.options (type=&#39;nested&#39;)</h4>
+<ul>
+<li><code>path</code> mandatory path needed by elastic</li>
+<li><code>score_mode</code> optional</li>
+<li><code>inner_hits</code> optional</li>
+</ul>
+<h3 id='children-example'>Children Example</h3><pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">RefinementListFilter</span>
+  <span class="nx">id</span><span class="o">=</span><span class="s2">"childrenTags"</span>
+  <span class="nx">title</span><span class="o">=</span> <span class="s2">"Children Tags"</span>
+  <span class="nx">field</span><span class="o">=</span><span class="s1">'name'</span>
+  <span class="nx">fieldOptions</span><span class="o">=</span><span class="p">{{</span><span class="na">type</span><span class="p">:</span><span class="s1">'children'</span><span class="p">,</span> <span class="na">options</span><span class="p">:{</span><span class="na">childType</span><span class="p">:</span><span class="s1">'tags'</span><span class="p">}}}</span><span class="sr">/&gt; </span><span class="err"> 
+</span></code></pre><h4 id='fieldoptions-options-type-39-children-39'>fieldOptions.options (type=&#39;children&#39;)</h4>
+<ul>
+<li><code>childType</code> mandatory childType needed by elastic</li>
+<li><code>score_mode</code> optional</li>
+<li><code>inner_hits</code> optional</li>
+<li><code>min_children</code> optional</li>
+<li><code>max_children</code> optional</li>
+</ul>

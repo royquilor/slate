@@ -1,0 +1,13 @@
+<h1 id='developer-guide'>Developer Guide</h1><h4 id='setup'>setup</h4>
+<ul>
+<li>checkout project on the <code>develop</code> branch</li>
+<li><code>yarn</code> to install dependencies</li>
+</ul>
+<h4 id='developing'>Developing</h4>
+<ul>
+<li><code>npm run test:watch</code> to run searchkit&#39;s tests</li>
+<li><code>npm run test:serve</code> to serve the test apps on <code>localhost:4000</code>. The Apps are in <code>test/e2e/server/apps</code> folder. Any updates to src are immediately reflected in the test apps.</li>
+<li><code>npm run build</code> to build the <code>lib</code> folder (es5) and standalone release.</li>
+</ul>
+<h4 id='running-e2es'>Running E2Es</h4>
+<p><strong>experimental</strong> <code>npm run test:e2e-standalone</code> to run e2es. Requires protractor v4 to be installed globally (npm i -g protractor ) and selenium webdriver to be running.</p>

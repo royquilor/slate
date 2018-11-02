@@ -1,0 +1,2 @@
+<h2 id='elasticsearch-indexing'>Elasticsearch Indexing</h2>
+<p>The components require elasticsearch fields indexed in a particular way. For example the Hierarchical Menu needs data to be indexed in levels. See <a href="../server/indexing.md">Indexing &amp; Mapping Guide</a> or the component&#39;s pages for more information.</p>

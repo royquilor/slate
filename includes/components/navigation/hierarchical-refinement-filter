@@ -1,0 +1,65 @@
+<h2 id='hierarchical-refinement'>Hierarchical Refinement</h2>
+<p>Component which renders a tree like structure. Used for items which have multiple levels of categorization. For example product categories &amp; folders. Difference between Hierarchical menu and Hierarchical refinement is refinement is able to handle more than one hierarchical category per document, menu can only have one.</p>
+<h3 id='indexing'>Indexing</h3>
+<p>If a document has the following paths for the field taxonomy:
+  /Color/Red/Firebrick
+  /Color/Red/Orange Red
+  /Color/Green/Sea Green
+  /Color/Green/Lime Green</p>
+<h4 id='mapping-definition'>Mapping definition</h4>
+<p>Below is the definition needed for a hierarchical field, we are making hierarchical colors in this case.
+<code>js
+color:{
+  type:&quot;nested&quot;,
+  properties:{
+    level:{type:&quot;integer&quot;},
+    ancestors:{type:&quot;string&quot;, index:&quot;not_analyzed&quot;},
+    value:{type:&quot;string&quot;, index:&quot;not_analyzed&quot;},
+    order:{type:&quot;integer&quot;}    
+  }
+}
+</code></p>
+<h4 id='indexing-the-data'>Indexing the data</h4>
+<p>The document field for the hierarchical color field would be:</p>
+<pre class="highlight javascript"><code>
+<span class="nl">color</span><span class="p">:[</span>
+  <span class="p">{</span><span class="na">level</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span><span class="s2">"Color"</span><span class="p">,</span> <span class="na">ancestors</span><span class="p">:[]},</span>
+  <span class="p">{</span><span class="na">level</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span><span class="s2">"Red"</span><span class="p">,</span> <span class="na">ancestors</span><span class="p">:[</span><span class="s2">"Color"</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">level</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span><span class="s2">"Firebrick"</span><span class="p">,</span> <span class="na">ancestors</span><span class="p">:[</span><span class="s2">"Color"</span><span class="p">,</span> <span class="s2">"Red"</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">level</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span><span class="s2">"Orange Red"</span><span class="p">,</span> <span class="na">ancestors</span><span class="p">:[</span><span class="s2">"Color"</span><span class="p">,</span> <span class="s2">"Red"</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">level</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span><span class="s2">"Green"</span><span class="p">,</span> <span class="na">ancestors</span><span class="p">:[</span><span class="s2">"Color"</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">level</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span><span class="s2">"Sea Green"</span><span class="p">,</span> <span class="na">ancestors</span><span class="p">:[</span><span class="s2">"Color"</span><span class="p">,</span> <span class="s2">"Green"</span><span class="p">]},</span>
+  <span class="p">{</span><span class="na">level</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span><span class="s2">"Lime Green"</span><span class="p">,</span> <span class="na">ancestors</span><span class="p">:[</span><span class="s2">"Color"</span><span class="p">,</span> <span class="s2">"Green"</span><span class="p">]}</span>
+<span class="p">]</span>
+
+</code></pre>
+<p>The array must have unique values, no duplicates (Color cannot be repeated for example). Order can be passed in as an integer value. Order value is optional.</p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">HierarchicalRefinementFilter</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+ <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">HierarchicalRefinementFilter</span> <span class="na">field=</span><span class="s2">"color"</span> <span class="na">title=</span><span class="s2">"Colors"</span> <span class="na">id=</span><span class="s2">"colors"</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>field</code> <em>(ESAttribute)</em>: ES Field name. See indexing section on the data required for component.</li>
+<li><code>title</code> <em>(string)</em>: Title of the menu. Shown as a header and within selected filters</li>
+<li><code>id</code> <em>(string)</em>: id of component. Must be unique. Used as key for url serialization</li>
+<li><code>startLevel</code> <em>(number)</em>: Optional. Can specify the root level to start from.</li>
+<li><code>orderKey</code> <em>(string)</em>: Order key either using default sortable keys <code>_count</code> <code>_term</code> or using the <code>order</code> field e.g. <code>color.order</code></li>
+<li><code>size</code> <em>(number)</em>: Optional. Number of buckets to return. Default value is 2^31 - 1.</li>
+<li><code>orderDirection</code> <em>(string)</em>: <code>asc</code> or <code>desc</code></li>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>countFormatter</code> <em>((count:number)=&gt; number|string)</em> A optional function to format the doc counts</li>
+</ul>
+<h3 id='demo'>Demo</h3>
+<iframe height='800' scrolling='no' src='//codepen.io/searchkit/embed/OMgmwR/?height=800&theme-id=0&default-tab=js,result&embed-version=2' frameborder='no' allowtransparency='true' allowfullscreen='true' style='width: 100%;'></iframe>

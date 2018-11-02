@@ -1,0 +1,43 @@
+<h2 id='dynamic-range-filter'>Dynamic Range Filter</h2>
+<p>The dynamic range filter lets users filter results within a numerical range. The min and max values are automatically computed by Elasticsearch using the data in the index.</p>
+
+<p><img src="./assets/dynamic-range-filter.png" height="150px"/></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">DynamicRangeFilter</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">DynamicRangeFilter</span> <span class="na">field=</span><span class="s2">"metaScore"</span> <span class="na">id=</span><span class="s2">"metascore"</span> <span class="na">title=</span><span class="s2">"MetaScore"</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>field</code> <em>(ESField)</em>: Required. An elasticsearch numerical field value.</li>
+<li><code>id</code> <em>(string)</em>: Required. id of component. Must be unique. Used as key for url serialisation</li>
+<li><code>title</code> <em>(string)</em>: Required. Title used for component and for selected filters component</li>
+<li><code>rangeComponent</code> <em>(ReactComponent)</em>: Control which sub range component to render
+
+<ul>
+<li>Compatible with <code>RangeSliderInput</code></li>
+<li>Defaults to <code>RangeSliderInput</code></li>
+</ul></li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>rangeFormatter</code> <em>((count:number)=&gt; string|number)</em> A formatter function used to convert numbers into more readable display values. E.g. long number formatting or prefixing currencies.`</li>
+<li><code>fieldOptions</code> <em>({type:&quot;embedded|nested|children&quot;, options:Object})</em> Configures the type field that is stored in ElasticSearch, can be <code>embedded</code>(default) <code>nested</code> or <code>children</code>
+
+<ul>
+<li><code>type:nested</code> requires <code>options.path</code> provided</li>
+<li><code>type:children</code> requires <code>options.childType</code> provided</li>
+</ul></li>
+</ul>
+<h3 id='translations'>Translations</h3>
+<ul>
+<li><code>range.divider</code> - &quot; - &quot;</li>
+</ul>

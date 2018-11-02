@@ -1,0 +1,58 @@
+<h2 id='stats'>Stats</h2>
+<p>This component lets you display how many results matched the query and other metrics on the results such as how fast the search was.</p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">HitsStats</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">HitsStats</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='overriding'>Overriding</h3>
+<p>If you want to customise the display of HitsStats, you can override the display by passing in a ReactComponent into <code>component</code> prop.</p>
+<pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">HitsStats</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">customHitStats</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="p">{</span><span class="nx">resultsFoundLabel</span><span class="p">,</span> <span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">hitsCount</span><span class="p">,</span> <span class="nx">timeTaken</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+    <span class="k">return</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">()</span><span class="si">}</span> <span class="nt">data</span><span class="err">-</span><span class="na">qa=</span><span class="s2">"hits-stats"</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"info"</span><span class="p">)</span><span class="si">}</span> <span class="nt">data</span><span class="err">-</span><span class="na">qa=</span><span class="s2">"info"</span><span class="p">&gt;</span>
+                I found <span class="si">{</span><span class="nx">hitsCount</span><span class="si">}</span> in <span class="si">{</span><span class="nx">timeTaken</span><span class="si">}</span>ms!
+            <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">HitsStats</span> <span class="na">component=</span><span class="si">{</span><span class="nx">customHitStats</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+<li><code>component</code> <em>(ReactComponent)</em>: A React component to override the default display component. Used when you want to change the markup of HitStats</li>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>countFormatter</code> <em>((count:number)=&gt; number|string)</em> A optional function to format the doc counts</li>
+</ul>
+<h3 id='demo'>Demo</h3>
+<p><a href="codepen://searchkit/PZWZbP?height=400&amp;theme=0"></a></p>
+<h3 id='props-2'> Props</h3>
+<ul>
+<li><code>translations</code> <em>(Object)</em>: An object of translations you wish to override. For more information on translations see <a href="../../core/Translate.md">translate</a> page.</li>
+</ul>
+<h3 id='translations'>Translations</h3>
+<ul>
+<li><code>hitstats.results_found</code> - &quot;{hitCount} results found in {timeTaken}&quot;</li>
+</ul>

@@ -1,0 +1,54 @@
+<h2 id='extending-components'>Extending Components</h2><h3 id='styling'>Styling</h3>
+<p>Searchkit uses <a href="https://en.bem.info/method/key-concepts">BEM concepts</a>. All searchkit components allow you to change the BEM block via the mod attribute. When BEM block is overridden, no styles will be applied to the component and you can then apply your styles as required.</p>
+<h3 id='bem-blocks'>BEM Blocks</h3>
+<p>We use <a href="https://github.com/albburtsev/bem-cn">BEM-cn</a> a BEM react library. Each component has one or more blocks (for example filters usually have 2 blocks, one for &quot;container&quot; and one for &quot;option&quot;). They will be accessible under <code>this.bemBlocks</code>. If you need an additional block or want to customize the block names, override the <code>defineBEMBlocks</code> method. Here is an example override</p>
+<pre class="highlight javascript"><code><span class="nx">defineBEMBlocks</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">blockName</span> <span class="o">=</span> <span class="s2">"refinement-list"</span>
+  <span class="k">return</span> <span class="p">{</span>
+    <span class="na">container</span><span class="p">:</span> <span class="nx">blockName</span><span class="p">,</span>
+    <span class="na">option</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">blockName</span><span class="p">}</span><span class="s2">-option`</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>The container block would be accessible using <code>this.bemBlocks.container</code>.</p>
+
+<p><code>this.bemBlocks.container(&quot;info&quot;).state({disabled:true})</code> -&gt; &quot;refinement-list__info is-disabled&quot;</p>
+<h3 id='overriding-rendering'>Overriding rendering</h3>
+<p>Some components have the feature to override the display component to allow you to control the markup and contents of the component using the <code>itemComponent</code> props. Example of overriding the default rendering of a hit from <code>Hits</code> component.</p>
+<pre class="highlight javascript"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">HitsStats</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">HitItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">().</span><span class="nx">mix</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"item"</span><span class="p">))}</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">img</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"poster"</span><span class="p">)}</span> <span class="nx">src</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">poster</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"title"</span><span class="p">)}</span> <span class="nx">dangerouslySetInnerHTML</span><span class="o">=</span><span class="p">{{</span><span class="na">__html</span><span class="p">:</span><span class="nx">_</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">result</span><span class="p">,</span><span class="s2">"highlight.title"</span><span class="p">,</span><span class="kc">false</span><span class="p">)</span> <span class="o">||</span> <span class="nx">props</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">title</span><span class="p">}}</span><span class="o">&gt;&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span><span class="p">)</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SearchBox</span>
+        <span class="nx">searchOnChange</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span>
+        <span class="nx">queryOptions</span><span class="o">=</span><span class="p">{{</span><span class="na">analyzer</span><span class="p">:</span><span class="s2">"standard"</span><span class="p">}}</span>
+        <span class="nx">queryFields</span><span class="o">=</span><span class="p">{[</span><span class="s2">"title^5"</span><span class="p">,</span> <span class="s2">"languages"</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">]}</span><span class="sr">/</span><span class="err">&gt;
+</span>
+      <span class="o">&lt;</span><span class="nx">Hits</span> <span class="nx">hitsPerPage</span><span class="o">=</span><span class="p">{</span><span class="mi">50</span><span class="p">}</span> <span class="nx">highlightFields</span><span class="o">=</span><span class="p">{[</span><span class="s2">"title"</span><span class="p">]}</span> <span class="nx">sourceFilter</span><span class="o">=</span><span class="p">{[</span><span class="s2">"title"</span><span class="p">,</span> <span class="s2">"poster"</span><span class="p">,</span> <span class="s2">"imdbId"</span><span class="p">]}</span> <span class="nx">itemComponent</span><span class="o">=</span><span class="p">{</span><span class="nx">HitItem</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+<p>The following components support this feature:</p>
+
+<ul>
+<li><a href="../components/basics/hits.md">Hits</a></li>
+<li><a href="../components/basics/initial-loader.md">InitialLoader</a></li>
+<li><a href="../components/navigation/menu.md">Menu</a></li>
+<li><a href="../components/navigation/refinement-list.md">Refinement List</a></li>
+<li><a href="../components/navigation/reset.md">Reset</a></li>
+<li><a href="../components/navigation/selected-filters.md">Selected Filters</a></li>
+</ul>

@@ -1,0 +1,61 @@
+<h2 id='tagfilter-tagfilterlist-tagfilterconfig'>TagFilter, TagFilterList, TagFilterConfig</h2>
+<p>A suite of components to provide tag filters within your search results.</p>
+
+<p><img src="./assets/tag-filter.png"/></p>
+<h3 id='example'>Example</h3>
+<p>Within a list item component we can use the <code>TagFilterList</code> and pass the <code>values</code> + <code>field</code>.
+Note that a <code>RefinementListFilter</code> or <code>MenuFilter</code> or <code>TagFilterConfig</code> is required with provided
+field so the filter can be added correctly.
+<code>jsx
+  &lt;ul style={{ marginTop: 8, marginBottom: 8, listStyle: &#39;none&#39;, paddingLeft: 20 }}&gt;
+    &lt;li&gt;Rating: {rated}&lt;/li&gt;          
+    &lt;li&gt;Writers: &lt;TagFilterList field=&quot;writers.raw&quot; values={writers} /&gt;&lt;/li&gt;
+    &lt;li&gt;Actors: &lt;TagFilterList field=&quot;actors.raw&quot; values={actors} /&gt;&lt;/li&gt;
+  &lt;/ul&gt;        
+</code></p>
+<h4 id='list-item-example'> List Item example</h4><pre class="highlight jsx tab-jsx"><code><span class="kr">const</span> <span class="nx">MovieHitsListItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="p">{</span><span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">result</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
+  <span class="kd">let</span> <span class="nx">url</span> <span class="o">=</span> <span class="s2">"http://www.imdb.com/title/"</span> <span class="o">+</span> <span class="nx">result</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">imdbId</span>  
+  <span class="kr">const</span> <span class="p">{</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">poster</span><span class="p">,</span> <span class="nx">writers</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">actors</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">genres</span> <span class="o">=</span> <span class="p">[],</span> <span class="nx">plot</span><span class="p">,</span> <span class="nx">released</span><span class="p">,</span> <span class="nx">rated</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">_source</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">().</span><span class="nx">mix</span><span class="p">(</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"item"</span><span class="p">))</span><span class="si">}</span> <span class="nt">data</span><span class="err">-</span><span class="na">qa=</span><span class="s2">"hit"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"poster"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">img</span> <span class="nt">data</span><span class="err">-</span><span class="na">qa=</span><span class="s2">"poster"</span> <span class="na">src=</span><span class="si">{</span><span class="nx">result</span><span class="p">.</span><span class="nx">_source</span><span class="p">.</span><span class="nx">poster</span><span class="si">}</span><span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"details"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href=</span><span class="si">{</span><span class="nx">url</span><span class="si">}</span> <span class="na">target=</span><span class="s2">"_blank"</span><span class="p">&gt;&lt;</span><span class="nt">h2</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"title"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h3</span> <span class="na">className=</span><span class="si">{</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">item</span><span class="p">(</span><span class="s2">"subtitle"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span>Released in <span class="si">{</span><span class="nx">source</span><span class="p">.</span><span class="nx">year</span><span class="si">}</span>, rated <span class="si">{</span><span class="nx">source</span><span class="p">.</span><span class="nx">imdbRating</span><span class="si">}</span>/10<span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">style=</span><span class="si">{</span><span class="p">{</span> <span class="na">marginTop</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="na">marginBottom</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="na">listStyle</span><span class="p">:</span> <span class="s1">'none'</span><span class="p">,</span> <span class="na">paddingLeft</span><span class="p">:</span> <span class="mi">20</span> <span class="p">}</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Rating: <span class="si">{</span><span class="nx">rated</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>          
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Writers: <span class="p">&lt;</span><span class="nc">TagFilterList</span> <span class="na">field=</span><span class="s2">"writers.raw"</span> <span class="na">values=</span><span class="si">{</span><span class="nx">writers</span><span class="si">}</span> <span class="p">/&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>Actors: <span class="p">&lt;</span><span class="nc">TagFilterList</span> <span class="na">field=</span><span class="s2">"actors.raw"</span> <span class="na">values=</span><span class="si">{</span><span class="nx">actors</span><span class="si">}</span> <span class="p">/&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>        
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="o">&lt;</span><span class="nx">TagFilterConfig</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"genres"</span> <span class="nx">title</span><span class="o">=</span><span class="s2">"Genres"</span> <span class="nx">field</span><span class="o">=</span><span class="s2">"genres.raw"</span> <span class="o">/&gt;</span>
+  <span class="p">&lt;</span><span class="nc">RefinementListFilter</span> <span class="na">id=</span><span class="s2">"actors"</span> <span class="na">title=</span><span class="s2">"Actors"</span> <span class="na">field=</span><span class="s2">"actors.raw"</span> <span class="na">size=</span><span class="si">{</span><span class="mi">10</span><span class="si">}</span><span class="p">/&gt;</span>
+  <span class="p">...</span>
+  <span class="o">&lt;</span><span class="nx">Hits</span> <span class="nx">hitsPerPage</span><span class="o">=</span><span class="p">{</span><span class="mi">12</span><span class="p">}</span> <span class="nx">itemComponent</span><span class="o">=</span><span class="p">{</span><span class="nx">MovieHitsListItem</span><span class="p">}</span><span class="sr">/</span><span class="err">&gt;
+</span><span class="p">}</span>
+</code></pre>
+<p>Note how we have a <code>RefinementListFilter</code> for <code>actors.raw</code> but needed to add a <code>TagFilterConfig</code> for <code>genres.raw</code>.
+The <code>TagFilterConfig</code> will not render anything, and will just provide configuration for that field.</p>
+<h3 id='tagfilterlist'>TagFilterList</h3>
+<p>TagFilterList renders a list of tags with add/remove behaviour
+- <code>filter</code> <em>(string)</em>: Required. The field id which should also map to the <code>id</code> of <code>RefinementListFilter</code> or <code>MenuFilter</code> or <code>TagFilterConfig</code> component within the page.
+- <code>values</code> <em>(Array<string>)</em>: The array of values per result, often read from the <code>_source</code> of each document</p>
+<h3 id='tagfilter'>TagFilter</h3>
+<p>A Low level component to render each Tag, used if you want to full control the surrounding list.
+- <code>filter</code> <em>(string)</em>: Required. The field id which should also map to the <code>id</code> of <code>RefinementListFilter</code> or <code>MenuFilter</code> or <code>TagFilterConfig</code> component within the page.
+- <code>value</code> <em>(string)</em>: The value of the tag</p>
+<h3 id='tagfilterconfig'>TagFilterConfig</h3>
+<p>A non rendering config component which holds logic to add/remove filters.
+-  <code>field</code> <em>(string)</em>: Elastic search field to filter on
+- <code>title</code> <em>(string)</em>: Title of the filter, used for selected filters rendering
+- <code>id</code>: <em>(string)</em>: unique id used for url serialization
+- <code>operator</code> <em>(&#39;AND&#39;|&#39;OR&#39;)</em>: If you filter on a and b with OR, results with either the value a or b will match. If you select a and b, results will show which have both a and b.</p>

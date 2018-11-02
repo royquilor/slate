@@ -1,0 +1,33 @@
+<h2 id='page-size-selector'>Page Size Selector</h2>
+<p>A component which allows to change the results per page of the search results.</p>
+
+<p><img src="./assets/page-size-selector.png" height="120px"/></p>
+
+<p><code>Select</code> and <code>Toggle</code> examples side by side</p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">Hits</span><span class="p">,</span>
+  <span class="nx">PageSizeSelector</span><span class="p">,</span>
+  <span class="nx">Select</span><span class="p">,</span> <span class="nx">Toggle</span>  
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+
+<span class="kr">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"sk-layout__results sk-results-list"</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"sk-results-list__action-bar sk-action-bar"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"sk-action-bar__info"</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">PageSizeSelector</span> <span class="na">options=</span><span class="si">{</span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">24</span><span class="p">]</span><span class="si">}</span> <span class="na">listComponent=</span><span class="si">{</span><span class="nx">Toggle</span><span class="si">}</span><span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">12</span><span class="si">}</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+</code></pre><h3 id='pagesizeselector-props'>PageSizeSelector Props</h3>
+<ul>
+<li><code>options</code> <em>(Array<number>)</em>: Array of page numbers to be shown</li>
+<li><code>listComponent</code> <em>(ReactComponent)</em>: Used to customize the list behavior
+
+<ul>
+<li>Compatible with <code>Select</code>, <code>Tabs</code>, <code>Toggle</code>, <code>ItemList</code>, <code>CheckboxItemList</code></li>
+<li>Defaults to <code>Select</code></li>
+</ul></li>
+</ul>

@@ -1,0 +1,22 @@
+<h2 id='grouped-selected-filters'>Grouped Selected Filters</h2>
+<p>An alternative component to SelectedFilters which groups the selected filters by Facet type and allows better use of screen real estate</p>
+
+<p><img src="/includes/components/navigation/assets/grouped-selected-filters.png" alt="Example" /></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">GroupedSelectedFilters</span><span class="p">,</span>
+  <span class="nx">Hits</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
+
+<span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"sk-layout__results sk-results-list"</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"sk-results-list__action-bar sk-action-bar"</span><span class="p">&gt;</span>    
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="s2">"sk-action-bar__filters"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">GroupedSelectedFilters</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nc">Hits</span> <span class="na">hitsPerPage=</span><span class="si">{</span><span class="mi">10</span><span class="si">}</span><span class="p">/&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+</code></pre><h3 id='groupedselectedfilters-props'>GroupedSelectedFilters props</h3>
+<ul>
+<li><code>groupComponent</code> <em>(React Component)</em>: Used to override the rendering for each filter group.</li>
+</ul>

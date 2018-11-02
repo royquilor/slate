@@ -1,0 +1,49 @@
+<h2 id='selected-filters'>Selected Filters</h2>
+<p>This component shows all the filters that have been applied to the current search.</p>
+
+<p><img src="./assets/selected-filters.png"/></p>
+<h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">SelectedFilters</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">SelectedFilters</span><span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id='overriding-selected-filter-component'>Overriding Selected Filter Component</h3>
+<p>If you want to tweak the markup for a selected filter item, you can use the <code>itemComponent</code> prop and pass in a React Component to be used instead to render each selected filter item.</p>
+<pre class="highlight jsx tab-jsx"><code>
+<span class="kr">import</span> <span class="p">{</span>
+  <span class="nx">SelectedFilters</span><span class="p">,</span>
+  <span class="nx">SearchkitComponent</span>
+<span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
+
+<span class="kr">const</span> <span class="nx">SelectedFilter</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+  <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">option</span><span class="p">()</span>
+    <span class="p">.</span><span class="nx">mix</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="s2">"item"</span><span class="p">))</span>
+    <span class="p">.</span><span class="nx">mix</span><span class="p">(</span><span class="s2">`selected-filter--${props.filterId}`</span><span class="p">)()</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s2">"name"</span><span class="p">)</span><span class="si">}</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">labelKey</span><span class="si">}</span>: <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">labelValue</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">bemBlocks</span><span class="p">.</span><span class="nx">option</span><span class="p">(</span><span class="s2">"remove-action"</span><span class="p">)</span><span class="si">}</span> <span class="na">onClick=</span><span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">removeFilter</span><span class="si">}</span><span class="p">&gt;</span>x<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">)</span>
+
+<span class="kr">class</span> <span class="nx">App</span> <span class="kr">extends</span> <span class="nx">SearchkitComponent</span> <span class="p">{</span>
+
+  <span class="nx">render</span><span class="p">(){</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">SelectedFilters</span> <span class="na">itemComponent=</span><span class="si">{</span><span class="nx">SelectedFilter</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre><h3 id='props'>Props</h3>
+<ul>
+<li><code>mod</code> <em>(string)</em>: Optional. A custom BEM container class.</li>
+<li><code>itemComponent</code> <em>(ReactComponent)</em>: Optional. Used to override the default display of a selected filter. See <code>Overriding Selected Filter Component</code> section.</li>
+</ul>
