@@ -1,7 +1,7 @@
 <h2 id='search-box'>Search Box</h2>
 <p>The search box component is where your users type their search queries.</p>
 
-<p><img src="/includes/components/basics/assets/search.png" alt="Example" /></p>
+<p><img src="/images/basics/search.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">SearchBox</span><span class="p">,</span>

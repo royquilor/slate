@@ -1,7 +1,7 @@
 <h2 id='grouped-selected-filters'>Grouped Selected Filters</h2>
 <p>An alternative component to SelectedFilters which groups the selected filters by Facet type and allows better use of screen real estate</p>
 
-<p><img src="/includes/components/navigation/assets/grouped-selected-filters.png" alt="Example" /></p>
+<p><img src="/images/navigation/grouped-selected-filters.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">GroupedSelectedFilters</span><span class="p">,</span>

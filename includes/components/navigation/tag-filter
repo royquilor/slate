@@ -1,7 +1,7 @@
 <h2 id='tagfilter-tagfilterlist-tagfilterconfig'>TagFilter, TagFilterList, TagFilterConfig</h2>
 <p>A suite of components to provide tag filters within your search results.</p>
 
-<p><img src="./assets/tag-filter.png"/></p>
+<p><img src="/images/navigation/tag-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3>
 <p>Within a list item component we can use the <code>TagFilterList</code> and pass the <code>values</code> + <code>field</code>.
 Note that a <code>RefinementListFilter</code> or <code>MenuFilter</code> or <code>TagFilterConfig</code> is required with provided

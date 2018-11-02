@@ -1,7 +1,7 @@
 <h2 id='selected-filters'>Selected Filters</h2>
 <p>This component shows all the filters that have been applied to the current search.</p>
 
-<p><img src="./assets/selected-filters.png"/></p>
+<p><img src="/images/navigation/selected-filters.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">SelectedFilters</span><span class="p">,</span>

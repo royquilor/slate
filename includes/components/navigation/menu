@@ -69,7 +69,7 @@
 <li><code>bucketsTransform</code> <em>((buckets:Array)=&gt; transformedBuckets)</em> A optional function to transform the buckets used for the aggregation, can be used to sort the list or to inject new facets.</li>
 </ul>
 <h3 id='list-component-examples'>List Component examples</h3>
-<p><img src="./assets/menu-list-components.png"/></p>
+<p><img src="/images/navigation/menu-list-components.png" alt="Example" /></p>
 <h3 id='translations'>Translations</h3>
 <ul>
 <li><code>All</code> - All</li>

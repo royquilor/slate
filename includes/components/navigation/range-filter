@@ -1,7 +1,7 @@
 <h2 id='range-filter'>Range Filter</h2>
 <p>The range filter lets users filter results within a numerical range. Provides a histogram so show the user where results are found on the range.</p>
 
-<p><img src="./assets/range-filter.png" height="150px"/></p>
+<p><img src="/images/navigation/range-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">RangeFilter</span><span class="p">,</span>

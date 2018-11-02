@@ -1,7 +1,7 @@
 <h2 id='page-size-selector'>Page Size Selector</h2>
 <p>A component which allows to change the results per page of the search results.</p>
 
-<p><img src="./assets/page-size-selector.png" height="120px"/></p>
+<p><img src="/images/display/page-size-selector.png" alt="Example" /></p>
 
 <p><code>Select</code> and <code>Toggle</code> examples side by side</p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>

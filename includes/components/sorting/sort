@@ -1,7 +1,7 @@
 <h2 id='sorting-selector'>Sorting Selector</h2>
 <p>This component lets you reorder your results. Each option requires a sortable Elasticsearch field and the order of which you want to sort by.</p>
 
-<p><img src="./assets/sorting.png"/></p>
+<p><img src="/images/sorting/sorting.png" alt="Example" /></p>
 
 <p><code>Select</code> and <code>Toggle</code> example side by side.</p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>

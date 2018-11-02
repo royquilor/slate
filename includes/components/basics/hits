@@ -2,7 +2,7 @@
 <p>Hits component displays results from ElasticSearch. To customize each result, you need to implement a React component and pass into <code>itemComponent</code> prop.
 The component will receive a single <code>hit</code> object from the search results, which will include <code>result._source</code> which contains the untouched stored fields which were indexed.</p>
 
-<p><img src="/includes/components/basics/assets/hits-grid.png" alt="Example" /></p>
+<p><img src="/images/basics/hits-grid.png" alt="Example" /></p>
 <h3 id='example-usage'>Example Usage</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">get</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"lodash"</span><span class="p">;</span>
 
@@ -51,7 +51,7 @@ The component will receive a single <code>hit</code> object from the search resu
 <li><code>sk-hits-list</code> List styling</li>
 </ul>
 <h3 id='table-list-example-using-listcomponent'>Table List example using listComponent</h3>
-<p><img src="/includes/components/basics/assets/hits-table.png" alt="Table example" /></p>
+<p><img src="/images/basics/hits-table.png" alt="Table example" /></p>
 <pre class="highlight jsx tab-jsx"><code><span class="kr">class</span> <span class="nx">MovieHitsTable</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
 
   <span class="nx">render</span><span class="p">(){</span>

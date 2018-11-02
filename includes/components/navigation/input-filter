@@ -1,6 +1,7 @@
 <h2 id='input-filter'>Input Filter</h2>
-<p>A input box based filter which is similar to SearchBox, but can be used multiple times, general on the left side panel.
-<img src="./assets/input-filter.png" height="200px"/></p>
+<p>A input box based filter which is similar to SearchBox, but can be used multiple times, general on the left side panel.</p>
+
+<p><img src="/images/navigation/input-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
   <span class="nx">InputFilter</span><span class="p">,</span>  
 <span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>

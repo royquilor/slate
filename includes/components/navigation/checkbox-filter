@@ -1,7 +1,7 @@
 <h2 id='checkbox-filter'>Checkbox Filter</h2>
 <p>A checkbox filter component which can be used with either simple or more complicated filters to decide on/off behaviour.</p>
 
-<p><img src="./assets/checkbox-filter.png" height="200px"/></p>
+<p><img src="/images/navigation/checkbox-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
   <span class="nx">CheckboxFilter</span><span class="p">,</span>
   <span class="nx">TermQuery</span><span class="p">,</span>

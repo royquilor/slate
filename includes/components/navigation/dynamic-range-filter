@@ -1,7 +1,7 @@
 <h2 id='dynamic-range-filter'>Dynamic Range Filter</h2>
 <p>The dynamic range filter lets users filter results within a numerical range. The min and max values are automatically computed by Elasticsearch using the data in the index.</p>
 
-<p><img src="./assets/dynamic-range-filter.png" height="150px"/></p>
+<p><img src="/images/navigation/dynamic-range-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">DynamicRangeFilter</span><span class="p">,</span>

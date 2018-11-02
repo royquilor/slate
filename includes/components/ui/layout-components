@@ -1,7 +1,7 @@
 <h2 id='layout-components'>Layout Components</h2>
 <p>Default set of layout components provided by Searchkit which work with Searchkit&#39;s default theme.</p>
 
-<p><img src="./assets/layout-components.png" /></p>
+<p><img src="/images/ui/layout-components.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">searchkit</span><span class="p">}</span><span class="o">&gt;</span>
   <span class="p">&lt;</span><span class="nc">Layout</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nc">TopBar</span><span class="p">&gt;</span>

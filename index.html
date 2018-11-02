@@ -495,11 +495,14 @@
 <h2 id='project-setup'>Project Setup</h2>
 <p>Our recommended project setup is using webpack and typescript. We also support using searchkit with ES6 / Webpack and using normal library script file. Installing via NPM is recommended.</p>
 <h3 id='using-module'>Using Module</h3>
-<p>We recommend using webpack for module dependency management of Searchkit&#39;s src, css and static assets. requires scss, file loaders to properly resolve searchkit dependencies. See <a href="http://github.com/searchkit/searchkit-boilerplate">searchkit boilerplate</a>.</p>
+<p>We recommend using webpack for module dependency management of Searchkit&#39;s src, css and static assets. requires scss, file loaders to properly resolve searchkit dependencies. See <a href="https://github.com/searchkit/searchkit-examples">searchkit boilerplate</a>.</p>
 <h3 id='installing-via-npm'>Installing via NPM</h3>
 <p>Searchkit is available on <a href="http://npmjs.com/package/searchkit">npm</a>. Searchkit is written with typescript therefore typescript definition files are available.</p>
-<pre class="highlight sh tab-shell"><code>npm install searchkit --save
-</code></pre>
+
+<p><code>
+npm install searchkit --save
+</code></p>
+
 <blockquote>
 <p>Importing with webpack / ES6</p>
 </blockquote>
@@ -549,11 +552,14 @@
 <span class="o">&lt;</span><span class="sr">/SearchkitProvider</span><span class="err">&gt;
 </span></code></pre><h3 id='using-local-es-server'>Using Local ES Server</h3>
 <p>Connecting Searchkit to your local elasticsearch instance. If you are are getting a cors related error, you will need to add the following to you `config/elasticsearch.yml&#39; file.</p>
-<pre class="highlight yaml tab-yaml"><code><span class="s">http.cors.enabled</span> <span class="pi">:</span> <span class="s">true</span>  
-<span class="s">http.cors.allow-origin</span> <span class="pi">:</span> <span class="s2">"</span><span class="s">*"</span>
-<span class="s">http.cors.allow-methods</span> <span class="pi">:</span> <span class="s">OPTIONS, HEAD, GET, POST, PUT, DELETE</span>
-<span class="s">http.cors.allow-headers</span> <span class="pi">:</span> <span class="s">X-Requested-With,X-Auth-Token,Content-Type, Content-Length</span>
-</code></pre><h3 id='configuration-2'>Configuration</h3><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"http://localhost:9200/"</span><span class="p">)</span>
+
+<p><code>
+http.cors.enabled : true<br>
+http.cors.allow-origin : &quot;*&quot;
+http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
+http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+</code></p>
+<h3 id='configuration-2'>Configuration</h3><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"http://localhost:9200/"</span><span class="p">)</span>
 
 
 <span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">searchkit</span><span class="p">}</span><span class="o">&gt;</span>
@@ -741,7 +747,7 @@ We then wrap a searchkit app and render to the page.</p>
 </code></pre><h2 id='search-box'>Search Box</h2>
 <p>The search box component is where your users type their search queries.</p>
 
-<p><img src="images/assets/search.png" alt="Example" /></p>
+<p><img src="images/basics/search.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">SearchBox</span><span class="p">,</span>
@@ -794,7 +800,7 @@ We then wrap a searchkit app and render to the page.</p>
 <p>Hits component displays results from ElasticSearch. To customize each result, you need to implement a React component and pass into <code>itemComponent</code> prop.
 The component will receive a single <code>hit</code> object from the search results, which will include <code>result._source</code> which contains the untouched stored fields which were indexed.</p>
 
-<p><img src="images/assets/hits-grid.png" alt="Example" /></p>
+<p><img src="images/basics/hits-grid.png" alt="Example" /></p>
 <h3 id='example-usage'>Example Usage</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span> <span class="nx">get</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">"lodash"</span><span class="p">;</span>
 
@@ -843,7 +849,7 @@ The component will receive a single <code>hit</code> object from the search resu
 <li><code>sk-hits-list</code> List styling</li>
 </ul>
 <h3 id='table-list-example-using-listcomponent'>Table List example using listComponent</h3>
-<p><img src="images/assets/hits-table.png" alt="Table example" /></p>
+<p><img src="images/basics/hits-table.png" alt="Table example" /></p>
 <pre class="highlight jsx tab-jsx"><code><span class="kr">class</span> <span class="nx">MovieHitsTable</span> <span class="kr">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
 
   <span class="nx">render</span><span class="p">(){</span>
@@ -890,7 +896,7 @@ The component will receive a single <code>hit</code> object from the search resu
 <h2 id='nohits'>NoHits</h2>
 <p><code>NoHits</code> component is displayed when the current query yields no results from Elasticsearch. <code>NoHits</code> may offer actions to help the user tweak their search to return results. <code>NoHits</code> will display an error when Elastic search responds with an error. You can override the display of NoHits by passing in a React Component in <code>component</code> or <code>errorComponent</code> props. See Overriding section for more details.</p>
 
-<p><img src="images/assets/no-hits.png" alt="Example" /></p>
+<p><img src="images/basics/no-hits.png" alt="Example" /></p>
 <h3 id='tweaking-query-actions'>Tweaking Query Actions</h3>
 <p>If the current query and filters applied returns no results, <code>NoHits</code> component will try to provide steps to adjust the search.</p>
 <h3 id='elasticsearch-suggestions-api'>Elasticsearch Suggestions API</h3>
@@ -1025,7 +1031,7 @@ const App = ()=<span class="err">&gt;</span> (
 <h2 id='pagination'>Pagination</h2>
 <p>The pagination component provides ability to go to next and previous page.</p>
 
-<p><img src="images/assets/pagination.png" alt="Example" /></p>
+<p><img src="images/navigation/pagination.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">Pagination</span><span class="p">,</span>
@@ -1144,7 +1150,7 @@ defaults to <code>true</code></li>
 <h2 id='numeric-refinement-list'>Numeric Refinement List</h2>
 <p>Allows the user to refine results based on a numerical elasticsearch attribute. You specify an array of options for the user to select from. Will only allow the user to select one.</p>
 
-<p><img src="./assets/numeric-itemlist.png" height="200px"/></p>
+<p><img src="images/navigation/numeric-itemlist.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">NumericRefinementListFilter</span><span class="p">,</span>
@@ -1264,7 +1270,7 @@ defaults to <code>true</code></li>
 <li><code>bucketsTransform</code> <em>((buckets:Array)=&gt; transformedBuckets)</em> A optional function to transform the buckets used for the aggregation, can be used to sort the list or to inject new facets.</li>
 </ul>
 <h3 id='list-component-examples'>List Component examples</h3>
-<p><img src="./assets/menu-list-components.png"/></p>
+<p><img src="images/navigation/menu-list-components.png" alt="Example" /></p>
 <h3 id='translations'>Translations</h3>
 <ul>
 <li><code>All</code> - All</li>
@@ -1279,7 +1285,7 @@ defaults to <code>true</code></li>
 <h2 id='range-filter'>Range Filter</h2>
 <p>The range filter lets users filter results within a numerical range. Provides a histogram so show the user where results are found on the range.</p>
 
-<p><img src="./assets/range-filter.png" height="150px"/></p>
+<p><img src="images/navigation/range-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">RangeFilter</span><span class="p">,</span>
@@ -1327,7 +1333,7 @@ defaults to <code>true</code></li>
 <h2 id='dynamic-range-filter'>Dynamic Range Filter</h2>
 <p>The dynamic range filter lets users filter results within a numerical range. The min and max values are automatically computed by Elasticsearch using the data in the index.</p>
 
-<p><img src="./assets/dynamic-range-filter.png" height="150px"/></p>
+<p><img src="images/navigation/dynamic-range-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">DynamicRangeFilter</span><span class="p">,</span>
@@ -1368,8 +1374,9 @@ defaults to <code>true</code></li>
 <li><code>range.divider</code> - &quot; - &quot;</li>
 </ul>
 <h2 id='input-filter'>Input Filter</h2>
-<p>A input box based filter which is similar to SearchBox, but can be used multiple times, general on the left side panel.
-<img src="./assets/input-filter.png" height="200px"/></p>
+<p>A input box based filter which is similar to SearchBox, but can be used multiple times, general on the left side panel.</p>
+
+<p><img src="images/navigation/input-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
   <span class="nx">InputFilter</span><span class="p">,</span>  
 <span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span><span class="p">;</span>
@@ -1415,7 +1422,7 @@ defaults to <code>true</code></li>
 <h2 id='checkbox-filter'>Checkbox Filter</h2>
 <p>A checkbox filter component which can be used with either simple or more complicated filters to decide on/off behaviour.</p>
 
-<p><img src="./assets/checkbox-filter.png" height="200px"/></p>
+<p><img src="images/navigation/checkbox-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
   <span class="nx">CheckboxFilter</span><span class="p">,</span>
   <span class="nx">TermQuery</span><span class="p">,</span>
@@ -1447,7 +1454,7 @@ defaults to <code>true</code></li>
 <h2 id='tagfilter-tagfilterlist-tagfilterconfig'>TagFilter, TagFilterList, TagFilterConfig</h2>
 <p>A suite of components to provide tag filters within your search results.</p>
 
-<p><img src="./assets/tag-filter.png"/></p>
+<p><img src="images/navigation/tag-filter.png" alt="Example" /></p>
 <h3 id='example'>Example</h3>
 <p>Within a list item component we can use the <code>TagFilterList</code> and pass the <code>values</code> + <code>field</code>.
 Note that a <code>RefinementListFilter</code> or <code>MenuFilter</code> or <code>TagFilterConfig</code> is required with provided
@@ -1508,7 +1515,7 @@ The <code>TagFilterConfig</code> will not render anything, and will just provide
 <h2 id='selected-filters'>Selected Filters</h2>
 <p>This component shows all the filters that have been applied to the current search.</p>
 
-<p><img src="./assets/selected-filters.png"/></p>
+<p><img src="images/navigation/selected-filters.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">SelectedFilters</span><span class="p">,</span>
@@ -1557,7 +1564,7 @@ The <code>TagFilterConfig</code> will not render anything, and will just provide
 <h2 id='grouped-selected-filters'>Grouped Selected Filters</h2>
 <p>An alternative component to SelectedFilters which groups the selected filters by Facet type and allows better use of screen real estate</p>
 
-<p><img src="images/assets/grouped-selected-filters.png" alt="Example" /></p>
+<p><img src="images/navigation/grouped-selected-filters.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">GroupedSelectedFilters</span><span class="p">,</span>
@@ -1648,7 +1655,7 @@ The <code>TagFilterConfig</code> will not render anything, and will just provide
 </code></pre><h2 id='hierarchical-menu'>Hierarchical Menu</h2>
 <p>Component which renders a tree like structure. Used for items which have multiple levels of categorization. Used for when documents have only one hierarchical category. For documents with more than one categories, see hierarchical Refinement filter.</p>
 
-<p><img src="images/assets/hierarchical-menu.png" alt="Example" /></p>
+<p><img src="images/navigation/hierarchical-menu.png" alt="Example" /></p>
 <h3 id='indexing'>Indexing</h3>
 <p>Hierarchical Menu needs an array of level fields. Levels is derived from the order of the array. If an item was in /Appliances/Air Conditioners/Window Air Conditioners category, the setup would be as follows:</p>
 <h3 id='mapping-example'>Mapping example</h3><pre class="highlight javascript"><code><span class="p">{</span>
@@ -1768,9 +1775,9 @@ color:{
 <h2 id='view-switcher'>View Switcher</h2>
 <p>Searchkit&#39;s view switcher components come in 2 seperate components. <code>ViewSwitcherHits</code> which toggles the hits display and <code>ViewSwitcherToggle</code> which is the actual toggle button to switch views.</p>
 
-<p><img src="./assets/view-switch-grid.png" height="200px"/>
-<img src="./assets/view-switch-list.png" height="200px"/>
-<img src="./assets/view-switch-table.png" height="200px"/></p>
+<p><img src="images/display/view-switch-grid.png" alt="Example" />
+<img src="images/display/view-switch-list.png" alt="Example" />
+<img src="images/display/view-switch-table.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
   <span class="nx">Hits</span><span class="p">,</span>
   <span class="nx">ViewSwitcherHits</span><span class="p">,</span>
@@ -1873,7 +1880,7 @@ The <code>hitComponents</code> prop is an array of views, with <code>key</code>,
 <h2 id='page-size-selector'>Page Size Selector</h2>
 <p>A component which allows to change the results per page of the search results.</p>
 
-<p><img src="./assets/page-size-selector.png" height="120px"/></p>
+<p><img src="images/display/page-size-selector.png" alt="Example" /></p>
 
 <p><code>Select</code> and <code>Toggle</code> examples side by side</p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
@@ -1906,7 +1913,7 @@ The <code>hitComponents</code> prop is an array of views, with <code>key</code>,
 <h2 id='sorting-selector'>Sorting Selector</h2>
 <p>This component lets you reorder your results. Each option requires a sortable Elasticsearch field and the order of which you want to sort by.</p>
 
-<p><img src="./assets/sorting.png"/></p>
+<p><img src="images/sorting/sorting.png" alt="Example" /></p>
 
 <p><code>Select</code> and <code>Toggle</code> example side by side.</p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
@@ -2005,7 +2012,7 @@ The <code>hitComponents</code> prop is an array of views, with <code>key</code>,
 <h2 id='layout-components'>Layout Components</h2>
 <p>Default set of layout components provided by Searchkit which work with Searchkit&#39;s default theme.</p>
 
-<p><img src="./assets/layout-components.png" /></p>
+<p><img src="images/ui/layout-components.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">searchkit</span><span class="p">}</span><span class="o">&gt;</span>
   <span class="p">&lt;</span><span class="nc">Layout</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nc">TopBar</span><span class="p">&gt;</span>
@@ -2050,7 +2057,7 @@ The <code>hitComponents</code> prop is an array of views, with <code>key</code>,
 </code></pre><h2 id='panel'>Panel</h2>
 <p>This is a titled Panel component which can be collapsed, it is the default <code>containerComponent</code> used by our filter components</p>
 
-<p><img src="./assets/panel.png" height="150px"/></p>
+<p><img src="images/ui/panel.png" alt="Example" /></p>
 <pre class="highlight jsx tab-jsx"><code><span class="kr">import</span>  <span class="p">{</span><span class="nx">Panel</span><span class="p">}</span> <span class="nx">from</span> <span class="s2">"searchkit"</span>
 
 <span class="kr">const</span> <span class="nx">PanelExample</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="p">(</span>
@@ -2066,50 +2073,50 @@ The <code>hitComponents</code> prop is an array of views, with <code>key</code>,
 <li><code>defaultCollapsed</code> <em>(boolean)</em> - Whether the panel can be collapsed (defaults to true when collapsable = true)</li>
 </ul>
 <h3 id='making-a-filter-component-collapsable'>Making a filter component collapsable</h3>
-<p><img src="./assets/panel-menu-collapsable.png" height="150px"/></p>
+<p><img src="images/ui/panel-menu-collapsable.png" alt="Example" /></p>
 <pre class="highlight jsx tab-jsx"><code>  <span class="o">&lt;</span><span class="nx">MenuFilter</span> <span class="nx">field</span><span class="o">=</span><span class="s2">"type.raw"</span> <span class="nx">size</span><span class="o">=</span><span class="p">{</span><span class="mi">10</span><span class="p">}</span>
     <span class="nx">title</span><span class="o">=</span><span class="s2">"Movie Type"</span> <span class="nx">id</span><span class="o">=</span><span class="s2">"types"</span>
     <span class="nx">containerComponent</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">Panel</span> <span class="nx">collapsable</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">defaultCollapsed</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span><span class="sr">/&gt;}/</span><span class="o">&gt;</span>
   <span class="sr">/</span><span class="err">&gt;
 </span></code></pre><h3 id='using-an-action-bar-component-in-a-panel'>Using an action bar component in a panel</h3>
-<p><img src="./assets/panel-action-component.png" height="120px"/></p>
+<p><img src="images/ui/panel-action-component.png" alt="Example" /></p>
 <pre class="highlight jsx tab-jsx"><code><span class="o">&lt;</span><span class="nx">Panel</span> <span class="nx">title</span><span class="o">=</span><span class="s2">"Selected filters"</span> <span class="nx">collapsable</span><span class="o">=</span><span class="p">{</span><span class="kc">true</span><span class="p">}</span> <span class="nx">defaultCollapsed</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span><span class="o">&gt;</span>
   <span class="p">&lt;</span><span class="nc">GroupedSelectedFilters</span><span class="p">/&gt;</span>
 <span class="p">&lt;</span><span class="err">/</span><span class="nc">Panel</span><span class="p">&gt;</span>
 </code></pre><h2 id='list-components'>List Components</h2>
 <p>A Suite of UI Components which render lists in various ways and can be passed to many Searchkit components to change their list appearance.</p>
 
-<p><img src="../navigation/assets/menu-list-components.png" /></p>
+<p><img src="images/navigation/menu-list-components.png" alt="Example" /></p>
 
 <p>Many of SearchKit&#39;s components which render lists will support a <code>listComponent</code> prop where these components an be referenced</p>
 <h3 id='itemlist'>ItemList</h3>
 <p>Used to render list of facets or items</p>
 
-<p><img src="../navigation/assets/menu-itemlist.png" height="150px"/></p>
+<p><img src="images/navigation/menu-itemlist.png" alt="Example" /></p>
 <h3 id='itemcheckboxlist'>ItemCheckboxList</h3>
 <p>Used to render list of facets or items when multiselecting</p>
 
-<p><img src="../navigation/assets/menu-checkbox.png" height="150px"/></p>
+<p><img src="images/navigation/menu-checkbox.png" alt="Example" /></p>
 <h3 id='itemhistogramlist'>ItemHistogramList</h3>
 <p>Used to render list of facets or items with a histogram bar showing the count. Requires a <code>doc_count</code> for each item, so won&#39;t work for Pagination, SortingSelector, and other non-filter components.</p>
 
-<p><img src="../navigation/assets/menu-histogram.png" height="150px"/></p>
+<p><img src="images/navigation/menu-histogram.png" alt="Example" /></p>
 <h3 id='tagcloud'>TagCloud</h3>
 <p>Used to render list of facets or items where the count influences the size of text. Requires a <code>doc_count</code> for each item, so won&#39;t work for Pagination, SortingSelector, and other non-filter components.</p>
 
-<p><img src="../navigation/assets/menu-tagcloud.png" height="150px"/></p>
+<p><img src="images/navigation/menu-tagcloud.png" alt="Example" /></p>
 <h3 id='tabs'>Tabs</h3>
 <p>Used to render tabs, often used for menu or view switching</p>
 
-<p><img src="../navigation/assets/menu-tabs.png" height="150px"/></p>
+<p><img src="images/navigation/menu-tabs.png" alt="Example" /></p>
 <h3 id='select'>Select</h3>
 <p>Used to render a selectable list of items</p>
 
-<p><img src="../navigation/assets/menu-select.png" height="150px"/></p>
+<p><img src="images/navigation/menu-select.png" alt="Example" /></p>
 <h3 id='toggle'>Toggle</h3>
 <p>Renders a toggle with single/multiple select behaviour</p>
 
-<p><img src="../navigation/assets/menu-toggle.png" height="150px"/></p>
+<p><img src="images/navigation/menu-toggle.png" alt="Example" /></p>
 <h3 id='compatible-parent-components'>Compatible parent components</h3><h4 id='refinementlistfilter'>RefinementListFilter</h4>
 <p>ItemList, ItemCheckboxList, ItemHistogramList, TagCloud, Tabs, Select, Toggle</p>
 <h4 id='menufilter'>MenuFilter</h4>
@@ -2127,33 +2134,33 @@ The <code>hitComponents</code> prop is an array of views, with <code>key</code>,
 <h2 id='range-components'>Range Components</h2>
 <p>A Suite of UI Components which render ranges in various ways and can be passed to some Searchkit components to change their range appearance.</p>
 
-<p><img src="./assets/range-components.png" /></p>
+<p><img src="images/ui/range-components.png" alt="Example" /></p>
 
 <p>Currently works for <code>RangeFilter</code> using the <code>rangeComponent</code> prop</p>
 <h3 id='rangesliderhistogram'>RangeSliderHistogram</h3>
 <p>RangeFilter&#39;s default style</p>
 
-<p><img src="./assets/range-slider-histogram.png"/></p>
+<p><img src="images/ui/range-slider-histogram.png" alt="Example" /></p>
 <h3 id='rangesliderhistograminput'>RangeSliderHistogramInput</h3>
 <p>Full-featured range component with a slider, histogram, and input. All other current range components are slimmed-down versions of this one.</p>
 
-<p><img src="./assets/range-slider-histogram-input.png"/></p>
+<p><img src="images/ui/range-slider-histogram-input.png" alt="Example" /></p>
 <h3 id='rangeinput'>RangeInput</h3>
 <p>Range component containing only min/max input fields. Requires pressing &quot;Go&quot; to update the filter.</p>
 
-<p><img src="./assets/range-input.png"/></p>
+<p><img src="images/ui/range-input.png" alt="Example" /></p>
 <h3 id='rangeslider'>RangeSlider</h3>
 <p>Simple slider, using <code>rc-slider</code>. Updates the filter when the handle is released.</p>
 
-<p><img src="./assets/range-slider.png"/></p>
+<p><img src="images/ui/range-slider.png" alt="Example" /></p>
 <h3 id='rangehistogram'>RangeHistogram</h3>
 <p>Renders a histogram with no filtering possibilities.</p>
 
-<p><img src="./assets/range-histogram.png"/></p>
+<p><img src="images/ui/range-histogram.png" alt="Example" /></p>
 <h3 id='rangesliderinput'>RangeSliderInput</h3>
-<p><img src="./assets/range-slider-input.png"/></p>
+<p><img src="images/ui/range-slider-input.png" alt="Example" /></p>
 <h3 id='rangehistograminput'>RangeHistogramInput</h3>
-<p><img src="./assets/range-histogram-input.png"/></p>
+<p><img src="images/ui/range-histogram-input.png" alt="Example" /></p>
 <h3 id='compatible-parent-components'>Compatible parent components</h3><h4 id='rangefilter'>RangeFilter</h4>
 <p>Works with all range components</p>
 <h1 id='theming'>Theming</h1>
@@ -2165,7 +2172,7 @@ The <code>hitComponents</code> prop is an array of views, with <code>key</code>,
 <li><a href="building-your-own.md">Building Your Own</a></li>
 </ul>
 <h2 id='using-searchkit-39-s-theme'>Using Searchkit&#39;s Theme</h2>
-<p><img src="./../assets/searchkit-theme.png"/></p>
+<p><img src="images/searchkit-theme.png" alt="Example" /></p>
 
 <p>We provide an out of the box theme to get developers started quickly.</p>
 <h3 id='getting-started'>Getting Started</h3>
@@ -2236,7 +2243,7 @@ import {
 <h3 id='grid-list-hit-items'>Grid / List Hit Items</h3>
 <p>We provide out of the box styles for Hit items for Grid and List Views. See <code>ViewSwitcherHits</code> component.</p>
 <h4 id='example'>Example</h4>
-<p><img src="./../assets/grid-view.jpg"/></p>
+<p><img src="images/grid-view.jpg" alt="Example" /></p>
 <pre class="highlight jsx tab-jsx"><code>
 <span class="kr">const</span> <span class="nx">MovieHitsGridItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="p">{</span><span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">result</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
@@ -2256,7 +2263,7 @@ import {
 <span class="p">}</span>
 
 </code></pre>
-<p><img src="./../assets/list-view.jpg"/></p>
+<p><img src="images/list-view.png" alt="Example" /></p>
 <pre class="highlight jsx tab-jsx"><code>
 <span class="kr">const</span> <span class="nx">MovieHitsListItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="p">{</span><span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">result</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>

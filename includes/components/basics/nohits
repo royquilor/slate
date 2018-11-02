@@ -1,7 +1,7 @@
 <h2 id='nohits'>NoHits</h2>
 <p><code>NoHits</code> component is displayed when the current query yields no results from Elasticsearch. <code>NoHits</code> may offer actions to help the user tweak their search to return results. <code>NoHits</code> will display an error when Elastic search responds with an error. You can override the display of NoHits by passing in a React Component in <code>component</code> or <code>errorComponent</code> props. See Overriding section for more details.</p>
 
-<p><img src="/includes/components/basics/assets/no-hits.png" alt="Example" /></p>
+<p><img src="/images/basics/no-hits.png" alt="Example" /></p>
 <h3 id='tweaking-query-actions'>Tweaking Query Actions</h3>
 <p>If the current query and filters applied returns no results, <code>NoHits</code> component will try to provide steps to adjust the search.</p>
 <h3 id='elasticsearch-suggestions-api'>Elasticsearch Suggestions API</h3>

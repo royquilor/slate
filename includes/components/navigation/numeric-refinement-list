@@ -1,7 +1,7 @@
 <h2 id='numeric-refinement-list'>Numeric Refinement List</h2>
 <p>Allows the user to refine results based on a numerical elasticsearch attribute. You specify an array of options for the user to select from. Will only allow the user to select one.</p>
 
-<p><img src="./assets/numeric-itemlist.png" height="200px"/></p>
+<p><img src="/images/navigation/numeric-itemlist.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">NumericRefinementListFilter</span><span class="p">,</span>

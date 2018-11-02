@@ -20,11 +20,14 @@
 <span class="o">&lt;</span><span class="sr">/SearchkitProvider</span><span class="err">&gt;
 </span></code></pre><h3 id='using-local-es-server'>Using Local ES Server</h3>
 <p>Connecting Searchkit to your local elasticsearch instance. If you are are getting a cors related error, you will need to add the following to you `config/elasticsearch.yml&#39; file.</p>
-<pre class="highlight yaml tab-yaml"><code><span class="s">http.cors.enabled</span> <span class="pi">:</span> <span class="s">true</span>  
-<span class="s">http.cors.allow-origin</span> <span class="pi">:</span> <span class="s2">"</span><span class="s">*"</span>
-<span class="s">http.cors.allow-methods</span> <span class="pi">:</span> <span class="s">OPTIONS, HEAD, GET, POST, PUT, DELETE</span>
-<span class="s">http.cors.allow-headers</span> <span class="pi">:</span> <span class="s">X-Requested-With,X-Auth-Token,Content-Type, Content-Length</span>
-</code></pre><h3 id='configuration-2'>Configuration</h3><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"http://localhost:9200/"</span><span class="p">)</span>
+
+<p><code>
+http.cors.enabled : true<br>
+http.cors.allow-origin : &quot;*&quot;
+http.cors.allow-methods : OPTIONS, HEAD, GET, POST, PUT, DELETE
+http.cors.allow-headers : X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+</code></p>
+<h3 id='configuration-2'>Configuration</h3><pre class="highlight javascript"><code><span class="kr">const</span> <span class="nx">searchkit</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SearchkitManager</span><span class="p">(</span><span class="s2">"http://localhost:9200/"</span><span class="p">)</span>
 
 
 <span class="o">&lt;</span><span class="nx">SearchkitProvider</span> <span class="nx">searchkit</span><span class="o">=</span><span class="p">{</span><span class="nx">searchkit</span><span class="p">}</span><span class="o">&gt;</span>

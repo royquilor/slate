@@ -1,37 +1,37 @@
 <h2 id='list-components'>List Components</h2>
 <p>A Suite of UI Components which render lists in various ways and can be passed to many Searchkit components to change their list appearance.</p>
 
-<p><img src="../navigation/assets/menu-list-components.png" /></p>
+<p><img src="/images/navigation/menu-list-components.png" alt="Example" /></p>
 
 <p>Many of SearchKit&#39;s components which render lists will support a <code>listComponent</code> prop where these components an be referenced</p>
 <h3 id='itemlist'>ItemList</h3>
 <p>Used to render list of facets or items</p>
 
-<p><img src="../navigation/assets/menu-itemlist.png" height="150px"/></p>
+<p><img src="/images/navigation/menu-itemlist.png" alt="Example" /></p>
 <h3 id='itemcheckboxlist'>ItemCheckboxList</h3>
 <p>Used to render list of facets or items when multiselecting</p>
 
-<p><img src="../navigation/assets/menu-checkbox.png" height="150px"/></p>
+<p><img src="/images/navigation/menu-checkbox.png" alt="Example" /></p>
 <h3 id='itemhistogramlist'>ItemHistogramList</h3>
 <p>Used to render list of facets or items with a histogram bar showing the count. Requires a <code>doc_count</code> for each item, so won&#39;t work for Pagination, SortingSelector, and other non-filter components.</p>
 
-<p><img src="../navigation/assets/menu-histogram.png" height="150px"/></p>
+<p><img src="/images/navigation/menu-histogram.png" alt="Example" /></p>
 <h3 id='tagcloud'>TagCloud</h3>
 <p>Used to render list of facets or items where the count influences the size of text. Requires a <code>doc_count</code> for each item, so won&#39;t work for Pagination, SortingSelector, and other non-filter components.</p>
 
-<p><img src="../navigation/assets/menu-tagcloud.png" height="150px"/></p>
+<p><img src="/images/navigation/menu-tagcloud.png" alt="Example" /></p>
 <h3 id='tabs'>Tabs</h3>
 <p>Used to render tabs, often used for menu or view switching</p>
 
-<p><img src="../navigation/assets/menu-tabs.png" height="150px"/></p>
+<p><img src="/images/navigation/menu-tabs.png" alt="Example" /></p>
 <h3 id='select'>Select</h3>
 <p>Used to render a selectable list of items</p>
 
-<p><img src="../navigation/assets/menu-select.png" height="150px"/></p>
+<p><img src="/images/navigation/menu-select.png" alt="Example" /></p>
 <h3 id='toggle'>Toggle</h3>
 <p>Renders a toggle with single/multiple select behaviour</p>
 
-<p><img src="../navigation/assets/menu-toggle.png" height="150px"/></p>
+<p><img src="/images/navigation/menu-toggle.png" alt="Example" /></p>
 <h3 id='compatible-parent-components'>Compatible parent components</h3><h4 id='refinementlistfilter'>RefinementListFilter</h4>
 <p>ItemList, ItemCheckboxList, ItemHistogramList, TagCloud, Tabs, Select, Toggle</p>
 <h4 id='menufilter'>MenuFilter</h4>

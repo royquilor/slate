@@ -1,5 +1,5 @@
 <h2 id='using-searchkit-39-s-theme'>Using Searchkit&#39;s Theme</h2>
-<p><img src="./../assets/searchkit-theme.png"/></p>
+<p><img src="/images/searchkit-theme.png" alt="Example" /></p>
 
 <p>We provide an out of the box theme to get developers started quickly.</p>
 <h3 id='getting-started'>Getting Started</h3>
@@ -70,7 +70,7 @@ import {
 <h3 id='grid-list-hit-items'>Grid / List Hit Items</h3>
 <p>We provide out of the box styles for Hit items for Grid and List Views. See <code>ViewSwitcherHits</code> component.</p>
 <h4 id='example'>Example</h4>
-<p><img src="./../assets/grid-view.jpg"/></p>
+<p><img src="/images/grid-view.jpg" alt="Example" /></p>
 <pre class="highlight jsx tab-jsx"><code>
 <span class="kr">const</span> <span class="nx">MovieHitsGridItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="p">{</span><span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">result</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>
@@ -90,7 +90,7 @@ import {
 <span class="p">}</span>
 
 </code></pre>
-<p><img src="./../assets/list-view.jpg"/></p>
+<p><img src="/images/list-view.png" alt="Example" /></p>
 <pre class="highlight jsx tab-jsx"><code>
 <span class="kr">const</span> <span class="nx">MovieHitsListItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span><span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kr">const</span> <span class="p">{</span><span class="nx">bemBlocks</span><span class="p">,</span> <span class="nx">result</span><span class="p">}</span> <span class="o">=</span> <span class="nx">props</span>

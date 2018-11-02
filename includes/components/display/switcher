@@ -1,9 +1,9 @@
 <h2 id='view-switcher'>View Switcher</h2>
 <p>Searchkit&#39;s view switcher components come in 2 seperate components. <code>ViewSwitcherHits</code> which toggles the hits display and <code>ViewSwitcherToggle</code> which is the actual toggle button to switch views.</p>
 
-<p><img src="./assets/view-switch-grid.png" height="200px"/>
-<img src="./assets/view-switch-list.png" height="200px"/>
-<img src="./assets/view-switch-table.png" height="200px"/></p>
+<p><img src="/images/display/view-switch-grid.png" alt="Example" />
+<img src="/images/display/view-switch-list.png" alt="Example" />
+<img src="/images/display/view-switch-table.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code><span class="kr">import</span> <span class="p">{</span>
   <span class="nx">Hits</span><span class="p">,</span>
   <span class="nx">ViewSwitcherHits</span><span class="p">,</span>

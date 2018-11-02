@@ -1,7 +1,7 @@
 <h2 id='hierarchical-menu'>Hierarchical Menu</h2>
 <p>Component which renders a tree like structure. Used for items which have multiple levels of categorization. Used for when documents have only one hierarchical category. For documents with more than one categories, see hierarchical Refinement filter.</p>
 
-<p><img src="/includes/components/navigation/assets/hierarchical-menu.png" alt="Example" /></p>
+<p><img src="/images/navigation/hierarchical-menu.png" alt="Example" /></p>
 <h3 id='indexing'>Indexing</h3>
 <p>Hierarchical Menu needs an array of level fields. Levels is derived from the order of the array. If an item was in /Appliances/Air Conditioners/Window Air Conditioners category, the setup would be as follows:</p>
 <h3 id='mapping-example'>Mapping example</h3><pre class="highlight javascript"><code><span class="p">{</span>

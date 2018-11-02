@@ -1,7 +1,7 @@
 <h2 id='pagination'>Pagination</h2>
 <p>The pagination component provides ability to go to next and previous page.</p>
 
-<p><img src="/includes/components/navigation/assets/pagination.png" alt="Example" /></p>
+<p><img src="/images/navigation/pagination.png" alt="Example" /></p>
 <h3 id='example'>Example</h3><pre class="highlight jsx tab-jsx"><code>
 <span class="kr">import</span> <span class="p">{</span>
   <span class="nx">Pagination</span><span class="p">,</span>
