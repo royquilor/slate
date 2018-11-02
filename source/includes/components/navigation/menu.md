@@ -74,7 +74,7 @@ class App extends React.Component {
 
 ### List Component examples
 
-<img src="./assets/menu-list-components.png"/>
+![Example](navigation/menu-list-components.png)
 
 ### Translations
 - `All` - All

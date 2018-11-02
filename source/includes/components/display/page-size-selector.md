@@ -1,7 +1,7 @@
 ## Page Size Selector
 A component which allows to change the results per page of the search results.
 
-<img src="./assets/page-size-selector.png" height="120px"/>
+![Example](display/page-size-selector.png)
 
 `Select` and `Toggle` examples side by side
 

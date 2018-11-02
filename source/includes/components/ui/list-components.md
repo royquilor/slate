@@ -1,8 +1,7 @@
 ## List Components
 A Suite of UI Components which render lists in various ways and can be passed to many Searchkit components to change their list appearance.
 
-<img src="../navigation/assets/menu-list-components.png" />
-
+![Example](navigation/menu-list-components.png)
 
 Many of SearchKit's components which render lists will support a `listComponent` prop where these components an be referenced
 
@@ -10,39 +9,39 @@ Many of SearchKit's components which render lists will support a `listComponent`
 
 Used to render list of facets or items
 
-<img src="../navigation/assets/menu-itemlist.png" height="150px"/>
+![Example](navigation/menu-itemlist.png)
 
 ### ItemCheckboxList
 
 Used to render list of facets or items when multiselecting
 
-<img src="../navigation/assets/menu-checkbox.png" height="150px"/>
+![Example](navigation/menu-checkbox.png)
 
 
 ### ItemHistogramList
 Used to render list of facets or items with a histogram bar showing the count. Requires a `doc_count` for each item, so won't work for Pagination, SortingSelector, and other non-filter components.
 
-<img src="../navigation/assets/menu-histogram.png" height="150px"/>
+![Example](navigation/menu-histogram.png)
 
 ### TagCloud
 Used to render list of facets or items where the count influences the size of text. Requires a `doc_count` for each item, so won't work for Pagination, SortingSelector, and other non-filter components.
 
-<img src="../navigation/assets/menu-tagcloud.png" height="150px"/>
+![Example](navigation/menu-tagcloud.png)
 
 ### Tabs
 Used to render tabs, often used for menu or view switching
 
-<img src="../navigation/assets/menu-tabs.png" height="150px"/>
+![Example](navigation/menu-tabs.png)
 
 ### Select
 Used to render a selectable list of items
 
-<img src="../navigation/assets/menu-select.png" height="150px"/>
+![Example](navigation/menu-select.png)
 
 ### Toggle
 Renders a toggle with single/multiple select behaviour
 
-<img src="../navigation/assets/menu-toggle.png" height="150px"/>
+![Example](navigation/menu-toggle.png)
 
 
 ### Compatible parent components

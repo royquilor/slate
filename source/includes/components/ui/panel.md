@@ -1,7 +1,7 @@
 ## Panel
 This is a titled Panel component which can be collapsed, it is the default `containerComponent` used by our filter components
 
-<img src="./assets/panel.png" height="150px"/>
+![Example](ui/panel.png)
 
 ```jsx
 import  {Panel} from "searchkit"
@@ -22,7 +22,7 @@ const PanelExample ()=> (
 
 
 ### Making a filter component collapsable
-<img src="./assets/panel-menu-collapsable.png" height="150px"/>
+![Example](ui/panel-menu-collapsable.png)
 
 ```jsx
   <MenuFilter field="type.raw" size={10}
@@ -32,7 +32,7 @@ const PanelExample ()=> (
 ```
 
 ### Using an action bar component in a panel
-<img src="./assets/panel-action-component.png" height="120px"/>
+![Example](ui/panel-action-component.png)
 
 ```jsx
 <Panel title="Selected filters" collapsable={true} defaultCollapsed={false}>

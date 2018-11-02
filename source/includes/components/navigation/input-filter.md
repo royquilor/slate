@@ -1,6 +1,7 @@
 ## Input Filter
 A input box based filter which is similar to SearchBox, but can be used multiple times, general on the left side panel.
-<img src="./assets/input-filter.png" height="200px"/>
+
+![Example](navigation/input-filter.png)
 
 ### Example
 

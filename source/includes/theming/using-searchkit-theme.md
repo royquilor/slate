@@ -1,6 +1,6 @@
 ## Using Searchkit's Theme
 
-<img src="./../assets/searchkit-theme.png"/>
+![Example](searchkit-theme.png)
 
 We provide an out of the box theme to get developers started quickly.
 
@@ -83,7 +83,7 @@ We provide out of the box styles for Hit items for Grid and List Views. See `Vie
 
 #### Example
 
-<img src="./../assets/grid-view.jpg"/>
+![Example](grid-view.jpg)
 
 ```jsx
 
@@ -106,7 +106,7 @@ const MovieHitsGridItem = (props)=> {
 
 ```
 
-<img src="./../assets/list-view.jpg"/>
+![Example](list-view.png)
 
 ```jsx
 

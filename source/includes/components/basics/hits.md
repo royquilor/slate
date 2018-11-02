@@ -2,7 +2,7 @@
 Hits component displays results from ElasticSearch. To customize each result, you need to implement a React component and pass into `itemComponent` prop.
 The component will receive a single `hit` object from the search results, which will include `result._source` which contains the untouched stored fields which were indexed.
 
-![Example](./assets/hits-grid.png)
+![Example](basics/hits-grid.png)
 
 ### Example Usage
 
@@ -54,7 +54,7 @@ Searchkit ships out the box with 2 styles of search results which are controlled
 
 ### Table List example using listComponent
 
-![Table example](./assets/hits-table.png)
+![Table example](basics/hits-table.png)
 
 ```jsx
 class MovieHitsTable extends React.Component {

@@ -1,7 +1,7 @@
 ## Numeric Refinement List
 Allows the user to refine results based on a numerical elasticsearch attribute. You specify an array of options for the user to select from. Will only allow the user to select one.
 
-<img src="./assets/numeric-itemlist.png" height="200px"/>
+![Example](navigation/numeric-itemlist.png)
 
 ### Example
 

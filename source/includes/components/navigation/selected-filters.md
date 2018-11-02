@@ -1,7 +1,7 @@
 ## Selected Filters
 This component shows all the filters that have been applied to the current search.
 
-<img src="./assets/selected-filters.png"/>
+![Example](navigation/selected-filters.png)
 
 ### Example
 

@@ -1,7 +1,7 @@
 ## Pagination
 The pagination component provides ability to go to next and previous page.
 
-![Example](./assets/pagination.png)
+![Example](navigation/pagination.png)
 ### Example
 
 ```jsx

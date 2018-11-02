@@ -1,7 +1,7 @@
 ## Checkbox Filter
 A checkbox filter component which can be used with either simple or more complicated filters to decide on/off behaviour.
 
-<img src="./assets/checkbox-filter.png" height="200px"/>
+![Example](navigation/checkbox-filter.png)
 
 ### Example
 

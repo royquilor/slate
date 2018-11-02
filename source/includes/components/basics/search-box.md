@@ -1,7 +1,7 @@
 ## Search Box
 The search box component is where your users type their search queries.
 
-![Example](./assets/search.png)
+![Example](basics/search.png)
 
 
 ### Example

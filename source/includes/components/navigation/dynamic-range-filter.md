@@ -1,7 +1,7 @@
 ## Dynamic Range Filter
 The dynamic range filter lets users filter results within a numerical range. The min and max values are automatically computed by Elasticsearch using the data in the index.
 
-<img src="./assets/dynamic-range-filter.png" height="150px"/>
+![Example](navigation/dynamic-range-filter.png)
 
 ### Example
 

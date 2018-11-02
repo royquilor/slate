@@ -2,7 +2,7 @@
 
 Default set of layout components provided by Searchkit which work with Searchkit's default theme.
 
-<img src="./assets/layout-components.png" />
+![Example](ui/layout-components.png)
 
 ### Example
 

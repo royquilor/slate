@@ -1,7 +1,7 @@
 ## Range Filter
 The range filter lets users filter results within a numerical range. Provides a histogram so show the user where results are found on the range.
 
-<img src="./assets/range-filter.png" height="150px"/>
+![Example](navigation/range-filter.png)
 
 ### Example
 
