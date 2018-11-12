@@ -190,7 +190,7 @@ html, body {
   // This is the currently selected ToC entry
   .toc-link.active {
     color: $nav-active-text;
-    color: #111;
+    color: #333;
 
     &::before {
       background-color: $nav-active-bg;
